@@ -2,12 +2,62 @@
 <html lang="en">
 
     <head>
-        <title>Title</title>
+        <title>RPI Classroom Rater</title>
+        <meta charset="utf-8">
+        <meta name="description" content="RPI Classroom Rater">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!-- Import Bootstrap -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+        <!-- Import CSS -->
         <link rel="stylesheet" type="text/css" href="style.css">
     </head>
 
     <body>
-        Hello World
-    </body>
+        <!-- navigation bar -->
+        <nav class="navbar navbar-expand-sm navbar-dark"; style="background-color: maroon;">
+            <a class="navbar-brand" href="index.html">RPI Classroom Rater</a>
+            <button class="navbar-toggler" data-toggle="collapse" data-target="#tabs">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="tabs">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="" style="color: white;">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="academics.html" style="color: white;">Sign Up</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <div class="container">
+            <div class="row height d-flex justify-content-center align-items-center">
+                <div class="col-md-6">
+                    <div class="search"> 
+                        <em class="fa fa-search"></em> 
+                        <input type="text" class="form-control" placeholder="Your School"> 
+                        <button class="btn btn-primary">Search</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container px-3">
+                <div class="row gx-5">
+                    <div class="col">
+                        <div class="p-4 border bg-light">Find Your Classroom</div>
+                    </div>
+                    <div class="col">
+                        <div class="p-4 border bg-light">Add New</div>
+                    </div>
+                    <div class="col">
+                        <div class="p-4 border bg-light">Rate Your Classroom</div>
+                    </div>
+                </div>
+              </div>
+        </div>
 
 </html>
