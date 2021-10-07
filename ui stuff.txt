@@ -20,3 +20,16 @@ Page for information on the room (this is in order)
 
 
 
+Add review page
+	Building and room (should be filled in already)
+	Rate your experience (and then stars like on current mockup)
+	
+	Write a review 
+	Textbox to write the review in
+	
+	Add special features
+	Textbox to add special features
+
+	Add main photo
+	Add photos(+)
+
