@@ -1,0 +1,22 @@
+
+
+
+
+front page has 2 search bars 
+	one for building and one for the room number
+	right under that the search results comes up for the different rooms in boxes
+	if there are rooms for the search then add new room box comes up instead
+
+
+Page for information on the room (this is in order)
+	Room path like on current mockup
+	Room building and room number 
+	main photo of the room
+	Overall rating of the room
+	special features of the room
+	add review button
+	reviews for the room
+	photos of the room
+
+
+
