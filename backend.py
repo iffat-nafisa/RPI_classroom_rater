@@ -4,6 +4,12 @@ import re
 
 dbpath="room_list.db"
 
+
+def regex(buildings, search):
+	pass
+
+	
+
 def insert_date(dbpath,add_room):
 	conn=squilt3.connect(dbpath) #set up connection
 	cursor=conn.cusor()   #open the 
