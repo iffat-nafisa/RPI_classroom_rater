@@ -4,26 +4,25 @@ import re
 
 dbpath="room_list.db"
 
-def insert_date(dbpath):
-	conn=squilt3.connect(dbpath) #set up connection
-	cursor=conn.cusor()   #open the 
-	sql='insert into room_list (building_name, room_number)'
-	data="" #(building_name, room_number)
-	cur.execute(sql,data)
-	conn.commit()
-	cur.close()
-	conn.close()
-
-def insert_mult_date(dbpath):
+def insert_date(dbpath,add_room):
 	conn=squilt3.connect(dbpath) #set up connection
 	cursor=conn.cusor()   #open the 
 	sql='insert into room_list (building_name, room_number)'\
 		'values(?,?,?)'
-	data_list=[('DCC','314'),(?,?)] #(building_name, room_number)
+	cur.execute(sql,data)
+	conn.commit()
+	cur.close()
+	conn.close()  #this function is for add new room
+
+def insert_mult_date(dbpath,room_list):
+	conn=squilt3.connect(dbpath) #set up connection
+	cursor=conn.cusor()   #open the 
+	sql='insert into room_list (building_name, room_number)'\
+		'values(?,?,?)'
 	cur.executemany(sql,data_list)
 	conn.commit()
 	cur.close()
-	conn.close()
+	conn.close() #this function is for set up the database
 
 class school:
 	schoolName = ""
