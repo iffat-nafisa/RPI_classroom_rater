@@ -2,18 +2,25 @@ import squilt3
 import re
 
 
-dbpath="buildings.db"
-
-
-
-
+dbpath="room_list.db"
 
 def insert_date(dbpath):
 	conn=squilt3.connect(dbpath) #set up connection
 	cursor=conn.cusor()   #open the 
-	sql="insert into building (building_name, room_number)"
+	sql='insert into room_list (building_name, room_number)'
 	data="" #(building_name, room_number)
 	cur.execute(sql,data)
+	conn.commit()
+	cur.close()
+	conn.close()
+
+def insert_mult_date(dbpath):
+	conn=squilt3.connect(dbpath) #set up connection
+	cursor=conn.cusor()   #open the 
+	sql='insert into room_list (building_name, room_number)'\
+		'values(?,?,?)'
+	data_list=[('DCC','314'),(?,?)] #(building_name, room_number)
+	cur.executemany(sql,data_list)
 	conn.commit()
 	cur.close()
 	conn.close()
