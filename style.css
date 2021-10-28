@@ -47,6 +47,13 @@
 .results .row{
     background-color: khaki;
 }
+
+.results h1{
+    background-color: khaki;
+    font-size: 30px;
+    padding: 10px;
+    text-align: center;
+}
 .results h2 {
     padding: 20px ;
     font-size: 25px;
@@ -93,4 +100,12 @@
 }
 ::-webkit-scrollbar-thumb:hover{
     background-color: lightgreen;
+}
+
+.query_2 button{
+    padding: 10px 20px;
+    font-size: 20px;
+    border-radius: 10px;
+    background-color:green;
+    text-align: center;
 }
