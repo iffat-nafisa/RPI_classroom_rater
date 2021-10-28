@@ -5,13 +5,13 @@ DATABASE = SqliteDatabase('cr.db')
 
 
 class School(Model):
-    schoolName = ""
+    schoolName = CharField(unique=True)
     buildingList = []  # a list of all the buildings in the school
 
     # this will return a building based on the passed in name
     def getBuildingByName(buildingName):
         for building in buildingList:
-            if (building.buildingName == buildingName):
+            if building.buildingName == buildingName:
                 return building
 
     # this will return a list of buildings that contain the passed in room
@@ -35,9 +35,9 @@ class Photo(Model):
 
 
 class Building(Model):
-    buildingName = ""
+    buildingName = CharField(unique=True)
     roomList = []  # a list of all the rooms in that building
-    buildingStreetAddress = ""
+    buildingStreetAddress = CharField(unique=True)
 
     # this will return the total number of rooms
     def numRooms():
@@ -68,8 +68,18 @@ class Building(Model):
     class Meta:
         database = DATABASE
 
+    @classmethod
+    def create_building(cls, buildingName):
+        try:
+            with DATABASE.transaction():
+                cls.create(
+                    buildingname=buildingName)
+        except IntegrityError:
+            raise ValueError("Building already exists")
+
 
 class Room(Model):
+    buildingName = ForeignKeyField(Building, backref='building')
     roomNumber = 0
     building = Building()
     mainRoomPhoto = Photo()  # this is the photo that can go with the room when it is searched
@@ -125,17 +135,37 @@ class Room(Model):
     class Meta:
         database = DATABASE
 
+    @classmethod
+    def create_room(cls, roomNumber):
+        try:
+            with DATABASE.transaction():
+                cls.create(
+                    roomNumber=roomNumber)
+        except IntegrityError:
+            raise ValueError("room already exists")
+
 
 class Review(Model):
-    reviewerUsername = "Anonymous"  # this is the default for when a user is not logged in
+    buildingName = ForeignKeyField(Building, backref='building')
+    roomNumber = ForeignKeyField(Building, backref='rooms')
+    reviewerUsername = CharField(max_length=20)  # this is the default for when a user is not logged in
     room = Room()  # the room that the review is for
-    reviewText = ""  # the actual review
+    reviewText = TextField()  # the actual review
     reviewPhotos = []  # any photos that go with the review
     specialFeatures = []  # a list of special features that the room has
-    numStars = 0;  # the number of stars a room has out of 5.
+    numStars = 0  # the number of stars a room has out of 5.
 
     class Meta:
         database = DATABASE
+
+    @classmethod
+    def create_room(cls, buildingName, roomNumber, reviewerUsername, reviewText, num):
+        try:
+            with DATABASE.transaction():
+                cls.create(
+                    roomNumber=roomNumber)
+        except IntegrityError:
+            raise ValueError("room already exists")
 
 
 def initialize():
