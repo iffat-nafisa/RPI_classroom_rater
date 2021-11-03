@@ -1,36 +1,44 @@
 from flask import Flask, g, render_template, redirect, url_for, request
 from flask_login import LoginManager
+from os import path
 import sqlite3
 from peewee import SqliteDatabase
 import models
+from flask_sqlalchemy import SQLAlchemy
+
+db = SQLAlchemy()
+DB_NAME = 'classroomrater.db'
 
 DEBUG = True
 PORT = 8000
 HOST = '0.0.0.0'
 
 app = Flask(__name__)
-app.secret_key = "secret"
+app.config['secret_key'] = "secret"
+app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_NAME}'
+db.init_app(app)
+from views import views
+app.register_blueprint(views, url_prefix='/')
 
-login_manager = LoginManager()
+# login_manager = LoginManager()
+
+def create_database(app):
+    if not path.exists(DB_NAME):
+        db.create_all(app=app)
+        print('Created Database!')
+
+# @app.before_request
+# def before_request():
+#     """Connect to the database before each request."""
+#     g.db = models.DATABASE
+#     g.db.connect()
 
 
-@app.route('/')
-def homepage():
-    return render_template("index.html")
-
-
-@app.before_request
-def before_request():
-    """Connect to the database before each request."""
-    g.db = models.DATABASE
-    g.db.connect()
-
-
-@app.after_request
-def after_request(response):
-    """Close the database connection after each request."""
-    g.db.close()
-    return response
+# @app.after_request
+# def after_request(response):
+#     """Close the database connection after each request."""
+#     g.db.close()
+#     return response
 
 
 # @app.route('/register', methods=('GET', 'POST'))
@@ -53,5 +61,5 @@ def after_request(response):
 #     return render_template('register.html', form=form)
 
 if __name__ == '__main__':
-    models.initialize()
     app.run(debug=DEBUG, host=HOST, port=PORT)
+    create_database(app)
