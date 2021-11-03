@@ -3,8 +3,9 @@ from flask_login import LoginManager
 from os import path
 import sqlite3
 from peewee import SqliteDatabase
-import models
+from models import School, Building, Room, Review, Img, Feature
 from flask_sqlalchemy import SQLAlchemy
+from views import views
 
 db = SQLAlchemy()
 DB_NAME = 'classroomrater.db'
@@ -17,7 +18,7 @@ app = Flask(__name__)
 app.config['secret_key'] = "secret"
 app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_NAME}'
 db.init_app(app)
-from views import views
+
 app.register_blueprint(views, url_prefix='/')
 
 # login_manager = LoginManager()
