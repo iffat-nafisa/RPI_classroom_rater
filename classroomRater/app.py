@@ -2,7 +2,7 @@ from flask import Flask, g, render_template, redirect, url_for, request
 from flask_login import LoginManager
 from os import path
 from peewee import SqliteDatabase
-from models import School, Building, Room, Review, Img, Feature
+from models import *
 from flask_sqlalchemy import SQLAlchemy
 from views import views
 
