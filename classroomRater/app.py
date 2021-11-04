@@ -1,7 +1,6 @@
 from flask import Flask, g, render_template, redirect, url_for, request
 from flask_login import LoginManager
 from os import path
-import sqlite3
 from peewee import SqliteDatabase
 from models import School, Building, Room, Review, Img, Feature
 from flask_sqlalchemy import SQLAlchemy
@@ -21,7 +20,7 @@ db.init_app(app)
 
 app.register_blueprint(views, url_prefix='/')
 
-# login_manager = LoginManager()
+
 
 def create_database(app):
     if not path.exists(DB_NAME):
