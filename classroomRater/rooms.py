@@ -7,14 +7,15 @@ rooms = Blueprint('rooms', __name__)
 
 @rooms.route('/addRoom', methods=['GET', 'POST'])
 def addRoom():
-    if request.method == "POST":
-        featureList_2 = request.form["featureList"]
-        print("COPY THAT")
-        print(featureList_2)
-    else:
-        print("==================>>>>>>>>>>========================>", file=sys.stderr)
-    print("HERE_SSS")
+    #uses the name
+    if request.method == 'post':
+        user = request.form['nm']
+        print("This is the user's value", user)
+
+    print("hereeeee")
     return render_template("addReview.html")
+
+
 
 @rooms.route('/viewRoom', methods=['GET', 'POST'])
 
@@ -23,10 +24,12 @@ def viewRoom():
     #The backend (.db file) will pass the following things to room.html, so it can be displayed in the frontend
     #Featured Picture, Feature #1, Feature #2, Feature #3, Overall Rating, List of all the Reviews, Pictures (Only 3 will be displayed)
 
-    #pictures[0] = Main "Featured" Picture, pictures[1] = Bottom Picture_1, pictures[2] = Bottom Picture_2, pictures[3] = Bottom Picture_3
-    #pictures = ["will", "it", "work"]
-    #features = ["I hope it", "does"]
-    #overallRating = 5
-    #lReviews = []
- 
-    return render_template("room.html")
+    #note: The first three elements of the list are considered to be the "featured" features shown in the room.html
+    allFeatures =["No AC", "Less Space", "Has projector"]
+    avgRating = 5
+    
+    #allReviews=[]
+    #allPictures=[]
+
+    #**locals() passes all the local variables defines in this function to room.html
+    return render_template("room.html", **locals())

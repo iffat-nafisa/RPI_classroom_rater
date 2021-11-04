@@ -20,13 +20,13 @@
 <div class="container px-4">
     <div class="row gx-5">
         <div class="col">
-            <div class="p-4 border bg-light">Feature #1}</div>
+            <div class="p-4 border bg-light">{{allFeatures[0]}}</div>
         </div>
         <div class="col">
-            <div class="p-4 border bg-light">Feature #2</div>
+            <div class="p-4 border bg-light">{{allFeatures[1]}}</div>
         </div>
         <div class="col">
-            <div class="p-4 border bg-light">Feature #3</div>
+            <div class="p-4 border bg-light">{{allFeatures[2]}}</div>
         </div>
     </div>
 </div>
@@ -35,7 +35,7 @@
     <div class="results">
         <div class="row"> 
             <h2>Overall Rating: </h2>
-            <span class = "ratingNumber">4.5</span>
+            <span class = "ratingNumber">{{avgRating}}</span>
         </div>
         <div class="row">
             <a href="listReviews.html" alt="Link to all Reviews"><h2>View all reviews</h2></a>
@@ -61,4 +61,7 @@
         </div>
     </div>
 </div>
+
+
+
 {% endblock %}
