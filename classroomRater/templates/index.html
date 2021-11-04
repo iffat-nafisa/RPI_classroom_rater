@@ -1,2 +1,37 @@
 {% extends "base.html" %}
-{% block title %}Changed {% endblock %}
+{% block title %}RPI Classroom Rater{% endblock %}
+
+
+{% block content %}
+<!-- Search for Room -->
+<div class="container">
+    <div class="row height d-flex justify-content-center align-items-center">
+        <div class="col-md-6">
+            <div class="results">
+                <h1>RPI Classroom Rater</h1>
+            </div>
+            <div class="search"> 
+                <em class="fa fa-search"></em> 
+                <input type="search" class="form-control" placeholder="Enter Building Name" id="buildingSearch" >                                                     
+            </div>
+            <div class="search"> 
+                <em class="fa fa-search"></em> 
+                <input type="search" class="form-control" placeholder="Enter Room or Features separated by Comma" id="roomSearch" onchange="openSearch()"> 
+            </div>
+            <div class="query_2">
+                <button class="btn btn-primary" onclick="openSearch()">Search</button>
+            </div>
+        </div>
+    </div>
+<!-- Query Results: -->
+    <div class = "container justify-content-left align-items-center">
+        <div class="initialResults">
+            <button class="btn-lg btn-primary" id="addNewClassroom">Add New Classroom</button>
+            <h2>Search Results:</h2>
+            <!-- Where the results go: -->
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}
