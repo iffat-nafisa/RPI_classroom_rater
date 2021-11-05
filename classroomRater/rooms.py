@@ -1,9 +1,6 @@
 from typing import Text
 from flask import Blueprint, render_template, request, redirect, url_for
 from models import db, Room
-# import sys
-# import models
-# from . import db
 
 #Create Blueprint
 rooms = Blueprint('rooms', __name__)
@@ -28,6 +25,9 @@ def addRoom():
     if request.method == "POST":
         building = request.form.get("building")
         room_no = request.form.get("room")
+        room_exists = db.session.query(Room.number).filter_by(number=room_no)
+        if room_exists:
+            return redirect(url_for('rooms.viewRoom'))
         room = Room(number=room_no, building_name=building)
         db.session.add(room)
         db.session.commit()
