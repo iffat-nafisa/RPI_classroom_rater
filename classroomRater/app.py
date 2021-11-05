@@ -7,7 +7,10 @@ from flask_sqlalchemy import SQLAlchemy
 from views import views
 from rooms import rooms
 
-
+def create_database(app):
+    if not path.exists(DB_NAME):
+        db.create_all(app=app)
+        print('Created Database!')
 
 DEBUG = True
 PORT = 8000
@@ -17,17 +20,11 @@ app = Flask(__name__)
 app.config['secret_key'] = "secret"
 app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_NAME}'
 db.init_app(app)
-
+create_database(app)
 app.register_blueprint(views, url_prefix='/')
 app.register_blueprint(rooms, url_prefix='/')
 
 
-def create_database(app):
-    if not path.exists(DB_NAME):
-        db.create_all(app=app)
-        print('Created Database!')
-
-
 if __name__ == '__main__':
     app.run(debug=DEBUG, host=HOST, port=PORT)
-    create_database(app)
+
