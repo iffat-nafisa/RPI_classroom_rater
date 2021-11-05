@@ -10,17 +10,19 @@
             <div class="results">
                 <h1>RPI Classroom Rater</h1>
             </div>
+            <form method="POST" action="/addroom">
             <div class="search"> 
                 <em class="fa fa-search"></em> 
-                <input type="search" class="form-control" placeholder="Enter Building Name" id="buildingSearch" >                                                     
+                <input type="search" class="form-control" placeholder="Enter Building Name" id="buildingSearch" name="building">                                                     
             </div>
             <div class="search"> 
                 <em class="fa fa-search"></em> 
-                <input type="search" class="form-control" placeholder="Enter Room or Features separated by Comma" id="roomSearch" onchange="openSearch()"> 
+                <input type="search" class="form-control" placeholder="Enter Room or Features separated by Comma" id="roomSearch" name="room" onchange="openSearch()"> 
             </div>
             <div class="query_2">
                 <button class="btn btn-primary" onclick="openSearch()">Search</button>
             </div>
+            </form>
         </div>
     </div>
 <!-- Query Results: -->

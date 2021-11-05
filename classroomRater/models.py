@@ -1,8 +1,10 @@
+from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import Column, ForeignKey, Integer, Unicode
 from sqlalchemy.orm import backref, relationship
-from app import db
 from sqlalchemy.sql import func
 
+db = SQLAlchemy()
+DB_NAME = 'classroomrater.db'
 
 class School(db.Model):
     name = db.Column(db.String(300), primary_key=True)
