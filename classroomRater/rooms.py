@@ -20,7 +20,7 @@ rooms = Blueprint('rooms', __name__)
 #     print("hereeeee")
 #     return render_template("addReview.html")
 
-@rooms.route('/addroom', methods=['GET', 'POST'])
+@rooms.route('/addRoom', methods=['GET', 'POST'])
 def addRoom():
     if request.method == "POST":
         building = request.form.get("building")
