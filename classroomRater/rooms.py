@@ -77,7 +77,7 @@ def addRoom():
 
         room_exists = db.session.query(Room.number).filter_by(number=room_no)
         if room_exists:
-            return redirect(url_for('rooms.viewRoom'))
+            return redirect(url_for('rooms.createReview'))
 
         room = Room(number=room_no, building_name=building)
 
@@ -106,3 +106,7 @@ def viewRoom():
 
     #**locals() passes all the local variables defines in this function to room.html
     return render_template("room.html", **locals())
+
+@rooms.route('/createReview', methods=['GET', 'POST'])
+def createReview():
+    return render_template("addReview.html")
