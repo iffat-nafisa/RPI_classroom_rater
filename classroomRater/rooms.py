@@ -25,6 +25,7 @@ def addRoom():
     if request.method == "POST":
         building = request.form.get("building")
         room_no = request.form.get("room")
+        
         room_exists = db.session.query(Room.number).filter_by(number=room_no)
         if room_exists:
             return redirect(url_for('rooms.viewRoom'))
@@ -34,7 +35,7 @@ def addRoom():
         return redirect(url_for('rooms.viewRoom'))
 
         
-    return render_template("index.html")
+    return render_template("inde.html")
 
 
 @rooms.route('/viewRoom', methods=['GET', 'POST'])
