@@ -20,7 +20,7 @@ rooms = Blueprint('rooms', __name__)
 #     print("hereeeee")
 #     return render_template("addReview.html")
 
-buildingList = ["DCC", "SAGE"]
+buildingList = ["DCC", "SAGE", "Amos Eaton Hall", "Carnegie Building", "Center for Biotechnology and Interdisciplinary Studies", "CBIS", "Chapel + Cultural Center", "Experimental Media and Performing Arts Center", "EMPAC", "Folsom Library", "Greene Building","Gurley Building", "Hirsch Observatory", "Houston Field House", "Jonsson Engineering Center", "Low Center", "West Hall", "Winslow Building"]
 
 def errorMessage(message):
     # make flash that prints the error onto HTML in red
@@ -31,15 +31,21 @@ def errorMessage(message):
 def addRoom():
     if request.method == "POST":
         building = request.form.get("building")
-        if building.upper() not in buildingList:
-            errorMessage("Building must be an RPI building") 
+        go = False
+        for b in buildingList:
+            if building.lower() in b.lower():
+                go = True
+                building = b
+                break
+        if not go:
+            errorMessage("Building must be a valid RPI building.")
             return
 
         room_no = request.form.get("room")
         try:
             int(room_no)
         except ValueError:
-            errorMessage("Room number must be a number") 
+            errorMessage("Room number must be a number.") 
             return
         
         room_exists = db.session.query(Room.number).filter_by(number=room_no)
