@@ -78,18 +78,8 @@ def addRoom():
         room_exists = db.session.query(Room.number).filter_by(number=room_no)
         if room_exists:
             return redirect(url_for('rooms.viewRoom'))
+
         room = Room(number=room_no, building_name=building)
-
-
-        
-
-        # if room in database:
-        #     return redirect(url_for('rooms.viewRoom')) # redirect the user to that room page
-        # else:
-        #     db.session.add(room) # add to the database 
-        #     db.session.commit()
-        #     return redirect(url_for('rooms.addReview')) # redirect the user to adding a new review for that page
-          
 
 
         # TODO this needs to be changed to the above. But "room in database" isnt the right way to do that
