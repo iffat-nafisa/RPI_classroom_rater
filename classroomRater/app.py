@@ -29,5 +29,6 @@ def create_database(app):
 
 
 if __name__ == '__main__':
-    app.run(debug=DEBUG, host=HOST, port=PORT)
     create_database(app)
+    app.run(debug=DEBUG, host=HOST, port=PORT)
+    
