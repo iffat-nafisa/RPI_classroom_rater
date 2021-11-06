@@ -13,41 +13,6 @@ rooms = Blueprint('rooms', __name__)
 
 
 
-# this function will search a room in a building that the user puts into the search bar. 
-# If the room does not exist it will add the room.
-# If the user inputs invalid text into either of the search bars then they will get 
-# an error message. 
-@rooms.route('/addRoom', methods=['GET', 'POST'])
-def addRoom():
-    if request.method == "POST":
-        building = request.form.get("building")
-        
-        if not checkBuildingInput(building):
-            errorMessage("Building must be a valid RPI building.")
-            return render_template("index.html")
-
-        room_no = request.form.get("room")
-
-        if not checkRoomInput(room_no): # check that the room is an integer number
-            errorMessage("Room number must be a number.")
-            return render_template("index.html")
-
-        room_exists = db.session.query(Room.number).filter_by(number=room_no)
-        if room_exists:
-            return redirect(url_for('rooms.createReview'))
-
-        room = Room(number=room_no, building_name=building)
-
-
-        # TODO this needs to be changed to the above. But "room in database" isnt the right way to do that
-        db.session.add(room) # add to the database 
-        db.session.commit()
-        return redirect(url_for('rooms.viewRoom')) # redirect the user to that room page
-
-
-        
-    return render_template("index.html")
-
 
 @rooms.route('/viewRoom', methods=['GET', 'POST'])
 def viewRoom():

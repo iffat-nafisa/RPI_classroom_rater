@@ -5,6 +5,7 @@ from models import db, Room
 #Create Blueprint
 views = Blueprint('views', __name__)
 
+# this is the master building list that contains all RPI acidemic building
 buildingList = ["DCC", "SAGE", "Amos Eaton Hall", "Carnegie Building", "Center for Biotechnology and Interdisciplinary Studies", "CBIS", "Chapel + Cultural Center", "Experimental Media and Performing Arts Center", "EMPAC", "Folsom Library", "Greene Building","Gurley Building", "Hirsch Observatory", "Houston Field House", "Jonsson Engineering Center", "Low Center", "West Hall", "Winslow Building"]
 
 
