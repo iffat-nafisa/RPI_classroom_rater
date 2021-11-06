@@ -8,36 +8,8 @@ rooms = Blueprint('rooms', __name__)
 
 
 # this is the master building list that contains all RPI acidemic building
-buildingList = ["DCC", "SAGE", "Amos Eaton Hall", "Carnegie Building", "Center for Biotechnology and Interdisciplinary Studies", "CBIS", "Chapel + Cultural Center", "Experimental Media and Performing Arts Center", "EMPAC", "Folsom Library", "Greene Building","Gurley Building", "Hirsch Observatory", "Houston Field House", "Jonsson Engineering Center", "Low Center", "West Hall", "Winslow Building"]
 
 
-
-# this function will show the user an error message in red.
-def errorMessage(message):
-    # make flash that prints the error onto HTML in red
-    pass
-
-
-
-# this funciton will check to make sure that the text in the building search bar 
-# is included in one of the buildings in the master building list
-def checkBuildingInput(building):
-    go = False
-    for b in buildingList: # loop through all the master building list 
-        if building.lower() in b.lower():
-            go = True
-            building = b
-            break
-    return go
-
-
-# this function will check to make sure that the text in the room search bar is an integer.
-def checkRoomInput(room):
-    try:
-        int(room)
-        return True
-    except ValueError:
-        return False
 
 
 
