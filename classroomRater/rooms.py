@@ -5,35 +5,6 @@ from models import db, Room
 #Create Blueprint
 rooms = Blueprint('rooms', __name__)
 
-# @rooms.route('/addRoom', methods=['GET', 'POST'])
-# def addRoom():
-#     print("Hi")
-#     #uses the name
-#     if request.method == "POST":
-#         user = request.form['nm']
-#         if (user == "work"):
-#             return render_template("index.html")
-#         else:
-#             return render_template("room.html")
-        
-
-#     print("hereeeee")
-#     return render_template("addReview.html")
-
-# @rooms.route('/addRoom', methods=['GET', 'POST'])
-# def addRoom():
-#     if request.method == "POST":
-#         building = request.form.get("building")
-#         room_no = request.form.get("room")
-#         room_exists = db.session.query(Room.number).filter_by(number=room_no).count()
-#         if room_exists > 0:
-#             return redirect(url_for('rooms.viewRoom'))
-#         room = Room(number=room_no, building_name=building)
-#         db.session.add(room)
-#         db.session.commit()
-#         return redirect(url_for('rooms.viewRoom'))
-       
-#     return render_template("index.html")
 
 
 @rooms.route('/viewRoom', methods=['GET', 'POST'])

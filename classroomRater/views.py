@@ -1,6 +1,5 @@
 from flask import Blueprint, render_template, request, redirect, url_for
 from models import db, Room
-# from views import views
 
 
 #Create Blueprint
