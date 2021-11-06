@@ -5,21 +5,6 @@ from models import db, Room
 #Create Blueprint
 rooms = Blueprint('rooms', __name__)
 
-# @rooms.route('/addRoom', methods=['GET', 'POST'])
-# def addRoom():
-#     print("Hi")
-#     #uses the name
-#     if request.method == "POST":
-#         user = request.form['nm']
-#         if (user == "work"):
-#             return render_template("index.html")
-#         else:
-#             return render_template("room.html")
-        
-
-#     print("hereeeee")
-#     return render_template("addReview.html")
-
 
 
 # this is the master building list that contains all RPI acidemic building
