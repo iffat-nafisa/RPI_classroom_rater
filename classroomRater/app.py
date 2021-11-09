@@ -5,7 +5,6 @@ from peewee import SqliteDatabase
 from models import db, DB_NAME, addSchoolAndBuildings
 from flask_sqlalchemy import SQLAlchemy
 from views import views
-from rooms import rooms
 
 
 
@@ -19,7 +18,6 @@ app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_NAME}'
 db.init_app(app)
 
 app.register_blueprint(views, url_prefix='/')
-app.register_blueprint(rooms, url_prefix='/')
 
 
 def create_database(app):
