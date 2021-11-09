@@ -44,13 +44,22 @@ def homepage():
     addSchoolAndBuildings()
     if request.method == "POST":
         building = request.form.get("building")
+
+        if building == None or building == "":
+            errorMessage("Please type input")
+            return render_template("index.html")
+
         building = checkBuildingInput(building)
-        
+
+
         if building == None:
             errorMessage("Building must be a valid RPI building.")
             return render_template("index.html")
 
         room_no = request.form.get("room")
+        if room_no == None or room_no == "":
+            error("Please type input")
+            return render_template("index.html")
 
         if not checkRoomInput(room_no): # check that the room is an integer number
             errorMessage("Room number must be a number.")
