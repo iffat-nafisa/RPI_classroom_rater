@@ -1,20 +1,29 @@
+/* Theme for general height attribute */
 .height {
     height: 30vh;
 }
+
+/* Theme for general search attribute */
 .search {
     position: relative;
     box-shadow: 0 0 40px rgba(51, 51, 51, .1)
 }
+
+/* Theme for search icon */
 .search input {
     height: 60px;
     text-indent: 25px;
     border: 2px solid #d6d4d4
 }
+
+/* Theme for search icon */
 .search .fa-search {
     position: absolute;
     top: 20px;
     left: 16px
 }
+
+/* Theme for search button */
 .search button {
     position: absolute;
     top: 5px;
@@ -23,6 +32,8 @@
     width: 110px;
     background: maroon
 }
+
+/* Theme for general item attribute */
 .item {
     position: relative;
     height: 300px;
@@ -31,50 +42,61 @@
 
 }
 
-
-/* Specific class used for setup*/
+/* Theme for results button */
 .results button {
     padding: 10px 20px;
     font-size: 20px;
     border-radius: 10px;
     background-color:green;
 }
+
+/* Theme for row in results attribute */
 .results .row{
     background-color: khaki;
 }
 
+/* Theme for results header h1 */
 .results h1{
     background-color: khaki;
     font-size: 30px;
     padding: 10px;
     text-align: center;
 }
+
+/* Theme for results header h2 */
 .results h2 {
     padding: 10px ;
     font-size: 25px;
     border-radius: 10px;
     background-color:khaki;  
 }
+
+/* Theme for results header h4 */
 .results h4{
     padding: 10px 5px ;
     font-size: 20px;
     border-radius: 10px;
     background-color:khaki; 
 }
+
+/* Theme for picture upload in results */
 .results .fileUploadPicture{
     padding: 10px 5px ;
 }
+
+/* Theme for features in results */
 .results .writeFeatures{
     width: 1500px;
     padding: 10px ;
 
 }
 
-
-/* User Gives Rating Based on Stars in addReview*/
+/* Theme for star ratings in results */
 .results .star-rating{
     display: none;
 }
+
+/* Theme for general rating in results */
 .results .rating{
     position: absolute;
     top:15%;
@@ -82,11 +104,15 @@
     transform:translate(-50%,-50%) rotateY(180deg);
     display: flex;
 }
+
+/* Theme for general label attribute in results */
 .results label{
     display: block;
     cursor: pointer;
     width: 50px;
 }
+
+/* Theme for before bullet point / label in results */
 .results label:before{
     content: '\f005';
     font-family: fontAwesome;
@@ -95,6 +121,8 @@
     font-size: 50px;
     color: #101010;
 }
+
+/* Theme for after bullet point / label in results */
 .results label:after{
     content: '\f005';
     font-family: fontAwesome;
@@ -107,6 +135,8 @@
     transition: 0.5s;
     text-shadow: 0 2px 5px rgba(0,0,0,0.5);
 }
+
+/* Other themes regarding label */
 .results label:hover:after,
 .results label:hover ~ label::after,
 .results input:checked ~ label::after
@@ -115,12 +145,13 @@
 }
 
 
-/* User Gives Rating*/
+/* Theme for user rating (stars) */
 .results .fa-star{
     padding:12px 5px;
     color:black;   
 }
 
+/* Theme for user rating (number) */
 .results .ratingNumber{
     padding: 10px 0px;
     color:black;
@@ -128,13 +159,12 @@
 }
 
 
-/* User Writes Review */
+/* Theme for user rating (text) */
 .results textarea{
     resize:none;
 }
 
-
-/* The .index page graphics */
+/* Theme for .index page button */
 .initialResults button {
     padding: 10px 20px;
     font-size: 20px;
@@ -142,6 +172,8 @@
     background-color:green;
     display: none;
 }
+
+/* Theme for .index page header h2 */
 .initialResults h2 {
     padding: 10px ;
     font-size: 25px;
@@ -149,8 +181,7 @@
     background-color:khaki;  
 }
 
-
-/* Scrollbar implemented*/
+/* Themes for scrollbar */
 ::-webkit-scrollbar{
     width: 10px;
 }
@@ -166,6 +197,7 @@
     background-color: lightgreen;
 }
 
+/* Themes for query 2 search button */
 .query_2 button{
     padding: 10px 20px;
     font-size: 20px;

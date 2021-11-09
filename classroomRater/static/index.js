@@ -1,4 +1,10 @@
-//For SearchBar
+/*
+- Function that realizes the search bar
+- Throw error if building and room inputs are empty, or building is empty
+- Throw error if format is incorrect (special characters inputted)
+- Get building and room inputs from user
+- If no error, direct user to the designated room and display info in the appropriate format
+*/
 function openSearch(){
     const building = document.getElementById("buildingSearch").value;
     const room = document.getElementById("roomSearch").value;
