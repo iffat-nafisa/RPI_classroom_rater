@@ -102,4 +102,11 @@ def viewRoom(buildingName, roomName):
 
 @views.route('/createReview/<buildingName>/<roomName>', methods=['GET', 'POST'])
 def createReview(buildingName, roomName):
+
+    b = buildingName
+    r = roomName
+
+    if request.method == "POST":
+        return render_template("room.html", **locals())
+
     return render_template("addReview.html")
