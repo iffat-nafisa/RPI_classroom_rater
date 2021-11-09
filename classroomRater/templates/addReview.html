@@ -6,7 +6,7 @@
 {% block content %}
     <div class="container justify-content-left align-items-center">
         <div class="results">
-            <form method="POST" action="/viewRoom/{{b}}/{{r}}">
+            <form method="POST" action="{{url_for('views.createReview', buildingName=variable,roomName=variable) }}">
 
             <div class="row"> 
                 <!-- Prompt for user rating -->

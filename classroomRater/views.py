@@ -107,6 +107,6 @@ def createReview(buildingName, roomName):
     r = roomName
 
     if request.method == "POST":
-        return render_template("room.html", **locals())
+        return render_template("viewRoom", buildingName=b,roomName=r)
 
     return render_template("addReview.html")
