@@ -14,7 +14,7 @@ PORT = 8000
 HOST = '0.0.0.0'
 
 app = Flask(__name__)
-app.config['secret_key'] = "secret"
+app.config['SECRET_KEY'] = "secret"
 app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_NAME}'
 db.init_app(app)
 
