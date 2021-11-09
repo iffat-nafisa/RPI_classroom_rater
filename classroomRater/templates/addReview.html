@@ -1,3 +1,5 @@
+<!-- Adding review HTML page -->
+
 {% extends "base.html" %}
 {% block title %}Add Review{% endblock %}
 
@@ -5,7 +7,10 @@
     <div class="container justify-content-left align-items-center">
         <div class="results">
             <div class="row"> 
+                <!-- Prompt for user rating -->
                 <h2>Rate Your Experience: </h2>
+
+                <!-- Stars for review -->
                 <div class="rating">
                     <input class ="star-rating" type="radio" name="star1" id="star1"><label for="star1"></label>
                     <input class ="star-rating" type="radio" name="star2" id="star2"><label for="star2"></label>
@@ -14,24 +19,36 @@
                     <input class ="star-rating" type="radio" name="star5" id="star5"><label for="star5"></label>
                 </div>                    
             </div>
+
             <div class="row">
+                <!-- Prompt for users to add rating -->
                 <h2>Write your Review:</h2>
             </div>
+
             <div class="row">
+                <!-- Declare input limits for user -->
                 <textarea name =reviewTextbox" id="reviewTextbox" placeholder="Character Limit: 500" cols="160" rows="10" maxlength="500"></textarea>
             </div>
+
             <div class="row">
+                <!-- Allow users to uplpad pictures + prompt -->
                 <h4>Add Pictures: </h4>
                 <input class="fileUploadPicture" type="file" onchange="readURL(this)" accept="Image" multiple id="picTaken" name="picTaken">
             </div>
+
             <div class="row">
+                <!-- Prompt for users to add feature words -->
                 <h4>Add Features (write a semicolon after every feature):</h4>
             </div>
+
             <div class="row">
+                <!--  Allow users to add features -->
                 <input class="writeFeatures" type="text" id="featureList" name="featureList" placeholder="Write Features Here (Character Length: 200)" maxlength="200"> 
             </div>
-            <!-- Below added for some spacing at the end -->
+
+            <!-- Extra spacing at the end -->
             <div class="row"><pre></pre></div>
+
             <div class="row">
                 <button class="btn-lg btn-primary">Submit</button>
             </div>                

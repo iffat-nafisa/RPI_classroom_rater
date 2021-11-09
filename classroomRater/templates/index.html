@@ -1,3 +1,4 @@
+<!-- File for landing page -->
 {% extends "base.html" %}
 {% block title %}RPI Classroom Rater{% endblock %}
 
@@ -11,14 +12,20 @@
                 <h1>RPI Classroom Rater</h1>
             </div>
             <form method="POST" action="/">
+
+            <!-- Prompt for entering building -->
             <div class="search"> 
                 <em class="fa fa-search"></em> 
                 <input type="search" class="form-control" placeholder="Enter Building Name" id="buildingSearch" name="building">                                                     
             </div>
+
+            <!-- Prompt for entering room -->
             <div class="search"> 
                 <em class="fa fa-search"></em> 
                 <input type="search" class="form-control" placeholder="Enter Room" id="roomSearch" name="room"> 
             </div>
+
+            <!-- Search button -->
             <div class="query_2">
                 <button class="btn btn-primary">Search</button>
             </div>
