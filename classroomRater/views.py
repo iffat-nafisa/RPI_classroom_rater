@@ -63,17 +63,11 @@ def homepage():
         room = Room(number=room_no, building_name=building)
         db.session.add(room) # add to the database 
         db.session.commit()
-        return redirect(url_for('rooms.createReview')) # redirect the user to that room page
+        return redirect(url_for('views.createReview', buildingName=building,roomName=room_no)) # redirect the user to that room page
 
 
         
-    return render_template("index.html")
-
-
-@views.route('/createReview/<buildingName>/<roomName>', methods=['GET', 'POST'])
-def reviewpage(buildingName, roomName):
-    pass
-    
+    return render_template("index.html")    
 
 
 
@@ -91,3 +85,11 @@ def viewRoom(buildingName, roomName):
 
     #**locals() passes all the local variables defines in this function to room.html
     return render_template("room.html", **locals())
+
+
+
+
+
+@views.route('/createReview/<buildingName>/<roomName>', methods=['GET', 'POST'])
+def createReview(buildingName, roomName):
+    return render_template("addReview.html")
