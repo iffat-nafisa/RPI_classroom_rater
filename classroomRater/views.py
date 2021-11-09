@@ -73,6 +73,7 @@ def homepage():
         room = Room(number=room_no, building_name=building)
         db.session.add(room) # add to the database 
         db.session.commit()
+        print(room_no)
         return redirect(url_for('views.createReview', buildingName=building,roomName=room_no)) # redirect the user to that room page
 
 
@@ -105,7 +106,7 @@ def viewRoom(buildingName, roomName):
 def createReview(buildingName, roomName):
 
     if request.method == "POST":
-        print("here")
+        print(roomName)
         return viewRoom(buildingName, roomName)
 
 
