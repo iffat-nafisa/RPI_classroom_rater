@@ -76,7 +76,6 @@ def homepage():
         return redirect(url_for('views.createReview', buildingName=building,roomName=room_no)) # redirect the user to that room page
 
 
-        
     return render_template("index.html")    
 
 
@@ -89,6 +88,8 @@ def viewRoom(buildingName, roomName):
     # note: The first three elements of the list are considered to be the "featured" features shown in the room.html
     allFeatures =["No AC", "Less Space", "Has projector"]
     avgRating = 5
+    current_building = buildingName
+    current_room = roomName
     
     # allReviews=[]
     # allPictures=[]
@@ -106,5 +107,6 @@ def createReview(buildingName, roomName):
     if request.method == "POST":
         print("here")
         return viewRoom(buildingName, roomName)
+
 
     return render_template("addReview.html")
