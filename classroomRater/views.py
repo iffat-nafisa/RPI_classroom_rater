@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, url_for
+from flask import Blueprint, render_template, request, redirect, url_for,flash
 from models import db, Room, addSchoolAndBuildings
 
 
@@ -11,7 +11,7 @@ buildingList = ["DCC", "SAGE", "Amos Eaton Hall", "Carnegie Building", "Center f
 
 # this function will show the user an error message in red.
 def errorMessage(message):
-    # make flash that prints the error onto HTML in red
+    flash(message,category='error')
     pass
 
 
@@ -47,13 +47,17 @@ def homepage():
         building = checkBuildingInput(building)
         
         if building == None:
-            errorMessage("Building must be a valid RPI building.")
+            # errorMessage('Building must be a valid RPI building.')
+            flash('Building must be a valid RPI building.',category='error')
+
             return render_template("index.html")
 
         room_no = request.form.get("room")
 
         if not checkRoomInput(room_no): # check that the room is an integer number
-            errorMessage("Room number must be a number.")
+            # errorMessage('Room number must be a number.')
+            flash('Building must be a valid RPI building.',category='error')
+
             return render_template("index.html")
 
         room_exists = db.session.query(Room.number).filter_by(number=room_no).count()
