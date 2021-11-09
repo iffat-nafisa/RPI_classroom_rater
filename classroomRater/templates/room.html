@@ -1,4 +1,5 @@
-{% extends "base.html" %}
+<!-- Display room info -->
+% extends "base.html" %}
 {% block title %}View Room{% endblock %}
 
 
@@ -6,19 +7,23 @@
 
 <div class="container justify-content-left align-items-center">
     <div class="results">
+        <!-- Main picture -->
         <div class="row">
             <img src ="main_DCC.jpg" alt="Featured Picture Here"/>
         </div>
+
+        <!-- Link to create review page -->
         <div class="row">
             <a href= "/createReview"><button class="btn-lg btn-primary">Add Review </button></a>
         </div>
-        <!-- Below added for some spacing at the end -->
+        <!-- Extra spacing at the end -->
         <div class="row">
             <pre></pre>
         </div>
     </div>
 </div>
 
+<!-- Display features of the room -->
 <div class="container px-4">
     <div class="row gx-5">
         <div class="col">
@@ -33,19 +38,27 @@
     </div>
 </div>
 
+<!-- Other information -->
 <div class="container justify-content-left align-items-center">
     <div class="results">
+        <!-- Rating number -->
         <div class="row"> 
             <h2>Overall Rating: </h2>
             <span class = "ratingNumber">{{avgRating}}</span>
         </div>
+
+        <!-- Link to all reviews -->
         <div class="row">
             <a href="listReviews.html" alt="Link to all Reviews"><h2>View all reviews</h2></a>
         </div>
+
         <!-- Need to do: When "Pictures" is clicked, where does it go; -->
+        <!-- Link to all pictures -->
         <div class="row">
             <a href="listPictures.html" alt="Link to all Pictures"><h2>Pictures (3)</h2></a>
         </div>
+
+        <!-- Display extra pictures -->
         <div class="row gx-5">
             <div class="col">
                 <img src="extra_1.jfif" alt="Extra Image_1" />
@@ -57,7 +70,8 @@
                 <img src="extra_1.jfif" alt="Extra Image_1" />
             </div>
         </div>
-        <!-- Below added for some spacing at the end -->
+
+        <!-- Extra spacing at the end -->
         <div class="row">
             <pre></pre>
         </div>

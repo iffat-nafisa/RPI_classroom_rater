@@ -1,5 +1,5 @@
 <!-- File for importing frameworks and other external resources -->
-<!-- Acts as a base file referenced by other HTML files so we don't have to repeatedly import things -->
+<!-- Acts as a template file referenced by other HTML files so we don't have to repeatedly import things -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -30,6 +30,8 @@
               </div>
             </div>
       </nav>
+
+      <!-- error message -->
         {% with messages = get_flashed_messages(with_categories=true) %} {%if
         messages %} {% for category, message in messages %} {% if category ==
         'error' %}

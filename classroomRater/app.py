@@ -6,26 +6,26 @@ from models import db, DB_NAME, addSchoolAndBuildings
 from flask_sqlalchemy import SQLAlchemy
 from views import views
 
-
-
 DEBUG = True
 PORT = 8000
 HOST = '0.0.0.0'
 
+# Set up flask and database; Initiate the web application
 app = Flask(__name__)
 app.config['SECRET_KEY'] = "secret"
 app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_NAME}'
 db.init_app(app)
-
 app.register_blueprint(views, url_prefix='/')
 
-
+# Create temporary database
+# @param app the current running application
 def create_database(app):
     if not path.exists(DB_NAME):
         db.create_all(app=app)
         print('Created Database!')
 
-
+# Main method for initiating the app
+#Create temporary database, then run app
 if __name__ == '__main__':
     create_database(app)
     app.run(debug=DEBUG, host=HOST, port=PORT)
