@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request, redirect, url_for
-from models import db, Room
+from models import db, Room, addSchoolAndBuildings
 
 
 #Create Blueprint
@@ -19,13 +19,11 @@ def errorMessage(message):
 # this funciton will check to make sure that the text in the building search bar 
 # is included in one of the buildings in the master building list
 def checkBuildingInput(building):
-    go = False
     for b in buildingList: # loop through all the master building list 
         if building.lower() in b.lower():
-            go = True
             building = b
-            break
-    return go
+            return building
+    return None
 
 
 # this function will check to make sure that the text in the room search bar is an integer.
@@ -43,10 +41,12 @@ def checkRoomInput(room):
 #This function will run whenever go to the "/" root
 @views.route('/', methods=['GET', 'POST'])
 def homepage():
+    addSchoolAndBuildings()
     if request.method == "POST":
         building = request.form.get("building")
+        building = checkBuildingInput(building)
         
-        if not checkBuildingInput(building):
+        if building == None:
             errorMessage("Building must be a valid RPI building.")
             return render_template("index.html")
 
@@ -61,9 +61,6 @@ def homepage():
             return redirect(url_for('rooms.viewRoom'))
 
         room = Room(number=room_no, building_name=building)
-
-
-        # TODO this needs to be changed to the above. But "room in database" isnt the right way to do that
         db.session.add(room) # add to the database 
         db.session.commit()
         return redirect(url_for('rooms.createReview')) # redirect the user to that room page
