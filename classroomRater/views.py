@@ -59,7 +59,7 @@ def homepage():
 
         room_no = request.form.get("room")
         if room_no == None or room_no == "":
-            error("Please type input")
+            errorMessage("Please type input")
             return render_template("index.html")
 
         if not checkRoomInput(room_no): # check that the room is an integer number
