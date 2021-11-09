@@ -47,17 +47,14 @@ def homepage():
         building = checkBuildingInput(building)
         
         if building == None:
-            # errorMessage('Building must be a valid RPI building.')
-            flash('Building must be a valid RPI building.',category='error')
+            errorMessage('Building must be a valid RPI building.')
 
             return render_template("index.html")
 
         room_no = request.form.get("room")
 
         if not checkRoomInput(room_no): # check that the room is an integer number
-            # errorMessage('Room number must be a number.')
-            flash('Building must be a valid RPI building.',category='error')
-
+            errorMessage('Room number must be a number.')
             return render_template("index.html")
 
         room_exists = db.session.query(Room.number).filter_by(number=room_no).count()
