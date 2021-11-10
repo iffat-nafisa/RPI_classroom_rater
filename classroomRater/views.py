@@ -87,10 +87,15 @@ def viewRoom(buildingName, roomName):
     # Featured Picture, Feature #1, Feature #2, Feature #3, Overall Rating, List of all the Reviews, Pictures (Only 3 will be displayed)
 
     # note: The first three elements of the list are considered to be the "featured" features shown in the room.html
+    
+    
+    
     allFeatures =["No AC", "Less Space", "Has projector"]
     avgRating = 5
+    userShowReview = ""
     current_building = buildingName
     current_room = roomName
+    
     
     # allReviews=[]
     # allPictures=[]
@@ -106,7 +111,6 @@ def viewRoom(buildingName, roomName):
 def createReview(buildingName, roomName):
 
     if request.method == "POST":
-        print(roomName)
         return viewRoom(buildingName, roomName)
 
 
