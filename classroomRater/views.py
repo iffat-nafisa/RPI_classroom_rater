@@ -43,13 +43,22 @@ def homepage():
     addSchoolAndBuildings()
     if request.method == "POST":
         building = request.form.get("building")
+
+        if building == None or building == "":
+            errorMessage("Please type input")
+            return render_template("index.html")
+
         building = checkBuildingInput(building)
-        
+
+
         if building == None:
             errorMessage("Building must be a valid RPI building.")
             return render_template("index.html")
 
         room_no = request.form.get("room")
+        if room_no == None or room_no == "":
+            error("Please type input")
+            return render_template("index.html")
 
         if not checkRoomInput(room_no): # check that the room is an integer number
             errorMessage("Room number must be a number.")
@@ -66,7 +75,11 @@ def homepage():
 
 
         
+<<<<<<< HEAD
     return render_template("index.html")
+=======
+    return render_template("index.html")    
+>>>>>>> 6a6e1f4838fe9af2f217d33c3746a405202e636f
 
 
 
@@ -86,6 +99,15 @@ def viewRoom(buildingName, roomName):
     return render_template("room.html", **locals())
 
 
+<<<<<<< HEAD
 @views.route('/createReview/<buildingName>/<roomName>', methods=['GET', 'POST'])
 def createReview(buildingName, roomName):
     return render_template("addReview.html")
+=======
+
+
+
+@views.route('/createReview/<buildingName>/<roomName>', methods=['GET', 'POST'])
+def createReview(buildingName, roomName):
+    return render_template("addReview.html")
+>>>>>>> 6a6e1f4838fe9af2f217d33c3746a405202e636f

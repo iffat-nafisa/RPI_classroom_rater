@@ -10,6 +10,7 @@ rooms = Blueprint('rooms', __name__)
 # this is the master building list that contains all RPI acidemic building
 
 
+<<<<<<< HEAD
 
 
 
@@ -32,3 +33,5 @@ rooms = Blueprint('rooms', __name__)
 # @rooms.route('/createReview', methods=['GET', 'POST'])
 # def createReview():
 #     return render_template("addReview.html")
+=======
+>>>>>>> 6a6e1f4838fe9af2f217d33c3746a405202e636f
