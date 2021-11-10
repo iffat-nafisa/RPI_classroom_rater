@@ -87,7 +87,23 @@ def viewRoom(buildingName, roomName):
     # Featured Picture, Feature #1, Feature #2, Feature #3, Overall Rating, List of all the Reviews, Pictures (Only 3 will be displayed)
 
     # note: The first three elements of the list are considered to be the "featured" features shown in the room.html
-    allFeatures =["No AC", "Less Space", "Has projector"]
+    
+    featureList = ["No AC", "Less Space", "Has projector"] # get from database
+    # change the line above to take from database
+    frequency = {}
+    for item in featureList:
+        # checking the element in dictionary
+        if item in frequency:
+            # incrementing the counr
+            frequency[item] += 1
+        else:
+            # initializing the count
+            frequency[item] = 1
+
+
+    frequency = sorted(frequency.items(), key=lambda x: x[1], reverse=True)
+
+    allFeatures =[frequency[0][0], frequency[1][0],frequency[2][0]]
     avgRating = 5
     current_building = buildingName
     current_room = roomName
@@ -106,7 +122,7 @@ def viewRoom(buildingName, roomName):
 def createReview(buildingName, roomName):
 
     if request.method == "POST":
-        print(roomName)
+        # send to database 
         return viewRoom(buildingName, roomName)
 
 
