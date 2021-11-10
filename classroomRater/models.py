@@ -29,6 +29,8 @@ class Room(db.Model):
     building_name = db.Column(db.String(300), db.ForeignKey('building.name'))
     reviews = db.relationship('Review', backref='room')
     images = db.relationship('Img', backref='room')
+    features = db.relationship('Feature', backref='room')
+
 
 # DB model for a review
 # A review has an id, rating, text, and the room it's associated with
@@ -52,6 +54,8 @@ class Img(db.Model):
 # NEED TO COMMENT AFTER FIGURING OUT
 class Feature(db.Model):
     description = db.Column(db.String(150), primary_key=True)
+    room_number = db.Column(db.Integer, db.ForeignKey('room.number'))
+
     # need to figure out many to many relationship 
 
 # Add schools and buildings to database
