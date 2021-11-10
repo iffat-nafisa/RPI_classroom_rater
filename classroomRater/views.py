@@ -107,6 +107,11 @@ def createReview(buildingName, roomName):
 
     if request.method == "POST":
         print(roomName)
+        # send review to database 
+        review = request.form.get("reviewTextbox")
+        print("review")
+        print(review)
+
         return viewRoom(buildingName, roomName)
 
 
