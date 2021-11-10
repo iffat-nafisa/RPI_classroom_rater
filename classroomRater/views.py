@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request, redirect, url_for,flash
-from models import db, Room, addSchoolAndBuildings
+from models import db, Room, addSchoolAndBuildings, Review
 
 
 #Create Blueprint
@@ -121,14 +121,12 @@ def viewRoom(buildingName, roomName, extra):
 def createReview(buildingName, roomName,extra):
 
     if request.method == "POST":
-        print(roomName)
         # send review to database 
         review = request.form.get("reviewTextbox")
-        print("review")
-        print(review)
-
-        # return viewRoom(buildingName, roomName)
-        # send to database 
+        featureList = request.form.get("featureList")
+        review_o = Review(id = hash(review), rating=5, written_review=review, room_number=roomName, building_name=buildingName)
+        db.session.add(review_o) # add to the database 
+        db.session.commit()
         return viewRoom(buildingName, roomName, extra)
 
 

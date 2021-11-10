@@ -40,6 +40,7 @@ class Review(db.Model):
     rating = db.Column(db.Integer)
     written_review = db.Column(db.String(100000))
     room_number = db.Column(db.Integer, db.ForeignKey('room.number'))
+    building_name = db.Column(db.String(300), db.ForeignKey('building.name'))
 
 # DB model for an image
 # An image has an id, its contents, a name, a mimetype, and the room it's associated with
