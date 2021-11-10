@@ -87,6 +87,8 @@ def viewRoom(buildingName, roomName, extra):
 
     # note: The first three elements of the list are considered to be the "featured" features shown in the room.html
     
+    
+    
     featureList = ["No AC", "Less Space", "Has projector"] # get from database
     # change the line above to take from database
     frequency = {}
@@ -104,8 +106,10 @@ def viewRoom(buildingName, roomName, extra):
 
     allFeatures =[frequency[0][0], frequency[1][0],frequency[2][0]]
     avgRating = 5
+    userShowReview = ""
     current_building = buildingName
     current_room = roomName
+    
     
     # allReviews=[]
     # allPictures=[]
