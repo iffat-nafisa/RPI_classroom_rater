@@ -68,21 +68,20 @@ def homepage():
 
         room_exists = db.session.query(Room.number).filter_by(number=room_no).count()
         if room_exists > 0:
-            return redirect(url_for('views.viewRoom',buildingName=building, roomName=room_no))
+            return redirect(url_for('views.viewRoom',buildingName=building, roomName=room_no, extra=room_no))
 
         room = Room(number=room_no, building_name=building)
         db.session.add(room) # add to the database 
         db.session.commit()
-        print(room_no)
-        return redirect(url_for('views.createReview', buildingName=building,roomName=room_no)) # redirect the user to that room page
+        return redirect(url_for('views.createReview', buildingName=building,roomName=room_no, extra=room_no)) # redirect the user to that room page
 
 
     return render_template("index.html")    
 
 
 
-@views.route('/viewRoom/<buildingName>/<roomName>', methods=['GET', 'POST'])
-def viewRoom(buildingName, roomName):
+@views.route('/viewRoom/<buildingName>/<roomName>/<extra>', methods=['GET', 'POST'])
+def viewRoom(buildingName, roomName, extra):
     # The backend (.db file) will pass the following things to room.html, so it can be displayed in the frontend
     # Featured Picture, Feature #1, Feature #2, Feature #3, Overall Rating, List of all the Reviews, Pictures (Only 3 will be displayed)
 
@@ -90,7 +89,22 @@ def viewRoom(buildingName, roomName):
     
     
     
-    allFeatures =["No AC", "Less Space", "Has projector"]
+    featureList = ["No AC", "Less Space", "Has projector"] # get from database
+    # change the line above to take from database
+    frequency = {}
+    for item in featureList:
+        # checking the element in dictionary
+        if item in frequency:
+            # incrementing the counr
+            frequency[item] += 1
+        else:
+            # initializing the count
+            frequency[item] = 1
+
+
+    frequency = sorted(frequency.items(), key=lambda x: x[1], reverse=True)
+
+    allFeatures =[frequency[0][0], frequency[1][0],frequency[2][0]]
     avgRating = 5
     userShowReview = ""
     current_building = buildingName
@@ -107,11 +121,19 @@ def viewRoom(buildingName, roomName):
 
 
 
-@views.route('/createReview/<buildingName>/<roomName>', methods=['GET', 'POST'])
-def createReview(buildingName, roomName):
+@views.route('/createReview/<buildingName>/<roomName>/<extra>', methods=['GET', 'POST'])
+def createReview(buildingName, roomName,extra):
 
     if request.method == "POST":
-        return viewRoom(buildingName, roomName)
+        print(roomName)
+        # send review to database 
+        review = request.form.get("reviewTextbox")
+        print("review")
+        print(review)
+
+        # return viewRoom(buildingName, roomName)
+        # send to database 
+        return viewRoom(buildingName, roomName, extra)
 
 
     return render_template("addReview.html")

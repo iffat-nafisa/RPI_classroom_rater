@@ -29,7 +29,7 @@ class Room(db.Model):
     building_name = db.Column(db.String(300), db.ForeignKey('building.name'))
     reviews = db.relationship('Review', backref='room')
     images = db.relationship('Img', backref='room')
-    images = db.relationship('Feature')
+    features = db.relationship('Feature', backref='room')
 
 
 # DB model for a review
