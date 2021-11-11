@@ -39,15 +39,15 @@ def checkRoomInput(room):
 # invalid ratings are ones that are -1.
 # will return 5 if there are no ratings
 def ave(reviews):
-    con=0
+    total=0
     s=0
     for r in reviews:
         if r.rating != -1:
-            con=con+1
+            total=total+1
             s=s+r.rating
-    if con == 0:
+    if total == 0:
         return 5
-    return s/con
+    return s/total
 
 
 
