@@ -41,6 +41,8 @@ def ave(reviews):
     for r in reviews:
         con=con+1
         s=s+r.rating
+    if con == 0:
+        return 0
     return s/con
 
 
