@@ -52,12 +52,12 @@ class Img(db.Model):
     mimetype = db.Column(db.Text, nullable=False)
     room_number = db.Column(db.Integer, db.ForeignKey('room.number'))
     
-# NEED TO COMMENT AFTER FIGURING OUT
+# DB model for a feature
+# A feature has a description and a room it's associated with
+# (DESCRIPTION, ROOM_NUMBER)
 class Feature(db.Model):
     description = db.Column(db.String(150), primary_key=True)
     room_number = db.Column(db.Integer, db.ForeignKey('room.number'))
-
-    # need to figure out many to many relationship 
 
 # Add schools and buildings to database
 def addSchoolAndBuildings():
