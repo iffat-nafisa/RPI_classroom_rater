@@ -60,12 +60,10 @@
         <div class="row">
             <h2>Written Reviews: </h2>
         </div>
-        <div class="row">
-            {% for item in userShowReview %}
-            <tr class = "tableShows">
-              <td class="showDisplay">{{item.written_review}}</td>
-            </tr>
-            {% endfor %}
+        
+        {% for item in userShowReview %}
+           {{item.written_review}}<br>
+        {% endfor %}
         </div>
 
         <!-- Display extra pictures -->

@@ -133,7 +133,10 @@ def viewRoom(buildingName, roomName):
         
         allFeatures =[lst[0][0].description, lst[1][0].description,lst[2][0].description]
 
+    for i in range(len(reviewList)):
+        reviewList[i].written_review += "\n"
     userShowReview = reviewList
+    
     current_building = buildingName
     current_room = roomName
 
