@@ -171,7 +171,8 @@ def createReview(buildingName, roomName):
             review = " "
 
         featureList = request.form.get("featureList")
-        rating = checkStars()
+        rating = round(checkStars(), 1)
+        
 
         review_o = Review(id = hash(time.time()), rating=rating, written_review=review, room_number=roomName, building_name=buildingName)
         features = featureList.split(";")
