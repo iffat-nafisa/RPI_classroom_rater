@@ -71,6 +71,8 @@
     background-color:khaki;  
 }
 
+
+
 /* Theme for results header h4 */
 .results h4{
     padding: 10px 5px ;
@@ -153,11 +155,18 @@
 
 /* Theme for user rating (number) */
 .results .ratingNumber{
-    padding: 10px 0px;
-    color:black;
-    font-size: 35px;
+    padding: 0px 0px;
+    color:green;
+    font-size: 30px;
 }
 
+.results tr{
+    background-color: green;
+}
+
+.results table.tableShows td{
+    background-color: green;
+}
 
 /* Theme for user rating (text) */
 .results textarea{

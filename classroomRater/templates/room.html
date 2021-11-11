@@ -58,9 +58,11 @@
         </div>
         <div class="row">
             <h2>Written Reviews: </h2>
+        </div>
+        <div class="row">
             {% for item in userShowReview %}
-            <tr>
-              <td>{{item.written_review}}</td>
+            <tr class = "tableShows">
+              <td class="showDisplay">{{item.written_review}}</td>
             </tr>
             {% endfor %}
         </div>
