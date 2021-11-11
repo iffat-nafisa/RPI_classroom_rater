@@ -116,17 +116,22 @@ def viewRoom(buildingName, roomName):
             # initializing the count
             frequency[item] = 1
 
-
+    frequency = sorted(frequency.items(), key=lambda x: x[1], reverse=True)
+    lst = []
+    for f in frequency:
+        lst.append(f)
     allFeatures=[]
-    if(len(frequency)<3):
+    if(len(lst)<3):
         for i in range(0,3):
-            if(i>=len(frequency)):
+            if(i>=len(lst)):
                 allFeatures.append('Empty')
             else:
-                allFeatures.append(frequency[i][0])
+                print(lst)
+                print(lst[i])
+                allFeatures.append(lst[i][0])
     else:
-        frequency = sorted(frequency.items(), key=lambda x: x[1], reverse=True)
-        allFeatures =[frequency[0][0], frequency[1][0],frequency[2][0]]
+        
+        allFeatures =[lst[0][0], lst[1][0],lst[2][0]]
 
     userShowReview = reviewList
     current_building = buildingName
