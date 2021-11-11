@@ -56,7 +56,8 @@ class Img(db.Model):
 # A feature has a description and a room it's associated with
 # (DESCRIPTION, ROOM_NUMBER)
 class Feature(db.Model):
-    description = db.Column(db.String(150), primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
+    description = db.Column(db.String(150))
     room_number = db.Column(db.Integer, db.ForeignKey('room.number'))
     building_name = db.Column(db.String(300), db.ForeignKey('building.name'))
 
