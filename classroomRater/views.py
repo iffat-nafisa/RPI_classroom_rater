@@ -177,11 +177,11 @@ def createReview(buildingName, roomName):
             f = f.strip()
             f = f.title()
             featuresUpdated.append(f)
-            f_o = Feature(description=f, room_number=roomName, building_name=buildingName)
+            f_o = Feature(id=hash(time.time()), description=f, room_number=roomName, building_name=buildingName)
             db.session.add(f_o)
             db.session.commit()
 
-        review_o = Review(id = hash(review + roomName + buildingName), rating=5, written_review=review, room_number=roomName, building_name=buildingName)
+        review_o = Review(id = hash(time.time()), rating=5, written_review=review, room_number=roomName, building_name=buildingName)
         db.session.add(review_o) # add to the database 
         db.session.commit()
         return redirect(url_for('views.viewRoom',buildingName=buildingName, roomName=roomName))
