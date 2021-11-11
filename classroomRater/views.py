@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request, redirect, url_for,flash
-from models import db, Room, addSchoolAndBuildings, Review
+from models import db, Room, addSchoolAndBuildings, Review, Feature
 
 
 #Create Blueprint
@@ -33,6 +33,15 @@ def checkRoomInput(room):
         return True
     except ValueError:
         return False
+
+
+def ave(reviews):
+    con=0
+    s=0
+    for r in reviews:
+        con=con+1
+        s=s+r.rating
+    return s/con
 
 
 
@@ -86,10 +95,12 @@ def viewRoom(buildingName, roomName, extra):
     # Featured Picture, Feature #1, Feature #2, Feature #3, Overall Rating, List of all the Reviews, Pictures (Only 3 will be displayed)
 
     # note: The first three elements of the list are considered to be the "featured" features shown in the room.html
+    room=Room(number=roomName, building_name=buildingName)
+    room=room.query.filter_by(number=roomName, building_name=buildingName).first()
+    featureList = room.features
+    reviewList=room.reviews
+    avgRating = ave(reviewList)
     
-    
-    
-    featureList = ["No AC", "Less Space", "Has projector"] # get from database
     # change the line above to take from database
     frequency = {}
     for item in featureList:
@@ -102,10 +113,17 @@ def viewRoom(buildingName, roomName, extra):
             frequency[item] = 1
 
 
-    frequency = sorted(frequency.items(), key=lambda x: x[1], reverse=True)
+    allFeatures=[]
+    if(len(frequency)<3):
+        for i in range(0,3):
+            if(i>=len(frequency)):
+                allFeatures.append('Empty')
+            else:
+                allFeatures.append(frequency[i][0])
+    else:
+        frequency = sorted(frequency.items(), key=lambda x: x[1], reverse=True)
+        allFeatures =[frequency[0][0], frequency[1][0],frequency[2][0]]
 
-    allFeatures =[frequency[0][0], frequency[1][0],frequency[2][0]]
-    avgRating = 5
     userShowReview = ""
     current_building = buildingName
     current_room = roomName
