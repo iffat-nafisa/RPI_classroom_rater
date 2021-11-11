@@ -103,7 +103,7 @@ def viewRoom(buildingName, roomName):
     room=room.query.filter_by(number=roomName, building_name=buildingName).first()
     featureList = room.features
     reviewList =room.reviews
-    avgRating = ave(reviewList)
+    avgRating = round(ave(reviewList),1)
     
     # change the line above to take from database
     frequency = {}
