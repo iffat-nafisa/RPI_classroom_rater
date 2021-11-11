@@ -173,7 +173,8 @@ def createReview(buildingName, roomName,extra):
         review_o = Review(id = hash(time.time()), rating=rating, written_review=review, room_number=roomName, building_name=buildingName)
         db.session.add(review_o) # add to the database 
         db.session.commit()
-        return viewRoom(buildingName, roomName, extra)
+        return render_template("room.html", buildingName=buildingName,roomName=roomName) # render room.html using buildingName and roomName
+        # return viewRoom(buildingName, roomName, extra)
         # return redirect(url_for('views.viewRoom',buildingName=buildingName, roomName=roomName, extra=roomName))
 
 
