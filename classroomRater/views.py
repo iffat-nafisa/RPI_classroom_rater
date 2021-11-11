@@ -164,7 +164,6 @@ def checkStars():
 def createReview(buildingName, roomName):
     print("Before createReview", request.method)
     if request.method == "POST":
-        request.method = "GET"
         # send review to database 
         review = request.form.get("reviewTextbox")
         if review == "" or review == None:
