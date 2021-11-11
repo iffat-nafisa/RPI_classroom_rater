@@ -39,8 +39,9 @@ def ave(reviews):
     con=0
     s=0
     for r in reviews:
-        con=con+1
-        s=s+r.rating
+        if r.rating != -1:
+            con=con+1
+            s=s+r.rating
     if con == 0:
         return 0
     return s/con
@@ -100,7 +101,7 @@ def viewRoom(buildingName, roomName, extra):
     room=Room(number=roomName, building_name=buildingName)
     room=room.query.filter_by(number=roomName, building_name=buildingName).first()
     featureList = room.features
-    reviewList=room.reviews
+    reviewList =room.reviews
     avgRating = ave(reviewList)
     
     # change the line above to take from database
@@ -139,6 +140,15 @@ def viewRoom(buildingName, roomName, extra):
 
 
 
+def checkStars():
+    x = 5
+    while x > 0:
+        stars = request.form.get("star"+str(x))
+        print(stars)
+        if stars == "1":
+            return x
+        x -= 1
+    return -1
 
 
 @views.route('/createReview/<buildingName>/<roomName>/<extra>', methods=['GET', 'POST'])
@@ -152,9 +162,10 @@ def createReview(buildingName, roomName,extra):
             review = " "
 
         featureList = request.form.get("featureList")
-        
+        rating = checkStars()
+        print(rating)
 
-        review_o = Review(id = hash(time.time()), rating=5, written_review=review, room_number=roomName, building_name=buildingName)
+        review_o = Review(id = hash(time.time()), rating=rating, written_review=review, room_number=roomName, building_name=buildingName)
         db.session.add(review_o) # add to the database 
         db.session.commit()
         return viewRoom(buildingName, roomName, extra)
