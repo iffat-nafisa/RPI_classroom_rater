@@ -128,10 +128,10 @@ def viewRoom(buildingName, roomName):
             else:
                 print(lst)
                 print(lst[i])
-                allFeatures.append(lst[i][0])
+                allFeatures.append(lst[i][0].description)
     else:
         
-        allFeatures =[lst[0][0], lst[1][0],lst[2][0]]
+        allFeatures =[lst[0][0].description, lst[1][0].description,lst[2][0].description]
 
     userShowReview = reviewList
     current_building = buildingName
@@ -164,6 +164,7 @@ def checkStars():
 def createReview(buildingName, roomName):
     print("Before createReview", request.method)
     if request.method == "POST":
+        request.method = "GET"
         # send review to database 
         review = request.form.get("reviewTextbox")
         if review == "" or review == None:
@@ -178,13 +179,14 @@ def createReview(buildingName, roomName):
         featuresUpdated = []
         room = db.session.query(Room.number, Room.building_name).filter_by(number=roomName, building_name=buildingName).first()
         print(room)
-        for f in features:
-            f = f.strip()
-            f = f.title()
-            featuresUpdated.append(f)
-            f_o = Feature(id = hash(time.time()), description=f, room_number=roomName, building_name=buildingName)
-            db.session.add(f_o)
-            db.session.commit()
+        if featureList!='':
+            for f in features:
+                f = f.strip()
+                f = f.title()
+                featuresUpdated.append(f)
+                f_o = Feature(id = hash(time.time()), description=f, room_number=roomName, building_name=buildingName)
+                db.session.add(f_o)
+                db.session.commit()
 
         review_o = Review(id = hash(time.time()), rating=rating, written_review=review, room_number=roomName, building_name=buildingName)
         db.session.add(review_o) # add to the database 
