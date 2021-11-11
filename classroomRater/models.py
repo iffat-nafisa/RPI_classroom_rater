@@ -19,17 +19,17 @@ class School(db.Model):
 class Building(db.Model):
     name = db.Column(db.String(150), primary_key=True)
     school_name = db.Column(db.String(300), db.ForeignKey('school.name'))
-    rooms = db.relationship('Room', backref='building')
+    rooms = db.relationship('Room', backref=backref('building', lazy="joined"))
 
 # DB model for a room
 # A room has a room number, the name of the building it's in, and reviews and images associated with it
 # (NUMBER, BUILDING_NAME, reviews, images) 
 class Room(db.Model):
     number = db.Column(db.Integer, primary_key=True)
-    building_name = db.Column(db.String(300), db.ForeignKey('building.name'))
-    reviews = db.relationship('Review', backref='room')
-    images = db.relationship('Img', backref='room')
-    features = db.relationship('Feature', backref='room')
+    building_name = db.Column(db.String(300), db.ForeignKey('building.name'), primary_key=True)
+    reviews = db.relationship('Review', backref=backref('room', lazy="joined"))
+    images = db.relationship('Img', backref=backref('room', lazy="joined"))
+    features = db.relationship('Feature', backref=backref('room', lazy="joined"))
 
 
 # DB model for a review
@@ -58,6 +58,7 @@ class Img(db.Model):
 class Feature(db.Model):
     description = db.Column(db.String(150), primary_key=True)
     room_number = db.Column(db.Integer, db.ForeignKey('room.number'))
+    building_name = db.Column(db.String(300), db.ForeignKey('building.name'))
 
 # Add schools and buildings to database
 def addSchoolAndBuildings():

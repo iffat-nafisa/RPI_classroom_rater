@@ -166,6 +166,19 @@ def createReview(buildingName, roomName,extra):
         print(rating)
 
         review_o = Review(id = hash(time.time()), rating=rating, written_review=review, room_number=roomName, building_name=buildingName)
+        features = featureList.split(";")
+        featuresUpdated = []
+        room = db.session.query(Room.number, Room.building_name).filter_by(number=roomName, building_name=buildingName).first()
+        print(room)
+        for f in features:
+            f = f.strip()
+            f = f.title()
+            featuresUpdated.append(f)
+            f_o = Feature(description=f, room_number=roomName, building_name=buildingName)
+            db.session.add(f_o)
+            db.session.commit()
+
+        review_o = Review(id = hash(review + roomName + buildingName), rating=5, written_review=review, room_number=roomName, building_name=buildingName)
         db.session.add(review_o) # add to the database 
         db.session.commit()
         return viewRoom(buildingName, roomName, extra)
