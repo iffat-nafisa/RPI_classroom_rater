@@ -80,20 +80,21 @@ def homepage():
 
         room_exists = db.session.query(Room.number).filter_by(number=room_no).count()
         if room_exists > 0:
-            return redirect(url_for('views.viewRoom',buildingName=building, roomName=room_no, extra=room_no))
+
+            return redirect(url_for('views.viewRoom',buildingName=building, roomName=room_no))
 
         room = Room(number=room_no, building_name=building)
         db.session.add(room) # add to the database 
         db.session.commit()
-        return redirect(url_for('views.createReview', buildingName=building,roomName=room_no, extra=room_no)) # redirect the user to that room page
+        return redirect(url_for('views.createReview', buildingName=building,roomName=room_no)) # redirect the user to that room page
 
 
     return render_template("index.html")    
 
 
 
-@views.route('/viewRoom/<buildingName>/<roomName>/<extra>', methods=['GET', 'POST'])
-def viewRoom(buildingName, roomName, extra):
+@views.route('/viewRoom/<buildingName>/<roomName>', methods=['GET', 'POST'])
+def viewRoom(buildingName, roomName):
     # The backend (.db file) will pass the following things to room.html, so it can be displayed in the frontend
     # Featured Picture, Feature #1, Feature #2, Feature #3, Overall Rating, List of all the Reviews, Pictures (Only 3 will be displayed)
 
@@ -130,6 +131,10 @@ def viewRoom(buildingName, roomName, extra):
     userShowReview = reviewList
     current_building = buildingName
     current_room = roomName
+
+    if request.method == "POST": # this needs to render the createReview page - addReview.html using the correct building name and room name
+        return redirect(url_for('views.createReview',buildingName=buildingName, roomName=roomName))
+
     
     
     # allReviews=[]
@@ -144,18 +149,17 @@ def checkStars():
     x = 5
     while x > 0:
         stars = request.form.get("star"+str(x))
-        print(stars)
         if stars == "1":
             return 6-x
         x -= 1
     return -1
 
 
-@views.route('/createReview/<buildingName>/<roomName>/<extra>', methods=['GET', 'POST'])
-def createReview(buildingName, roomName,extra):
-
+@views.route('/createReview/<buildingName>/<roomName>', methods=['GET', 'POST'])
+def createReview(buildingName, roomName):
+    print("Before createReview", request.method)
     if request.method == "POST":
-        request.method = ""
+        request.method = "GET"
         # send review to database 
         review = request.form.get("reviewTextbox")
         if review == "" or review == None:
@@ -163,7 +167,6 @@ def createReview(buildingName, roomName,extra):
 
         featureList = request.form.get("featureList")
         rating = checkStars()
-        print(rating)
 
         review_o = Review(id = hash(time.time()), rating=rating, written_review=review, room_number=roomName, building_name=buildingName)
         features = featureList.split(";")
@@ -181,6 +184,6 @@ def createReview(buildingName, roomName,extra):
         review_o = Review(id = hash(review + roomName + buildingName), rating=5, written_review=review, room_number=roomName, building_name=buildingName)
         db.session.add(review_o) # add to the database 
         db.session.commit()
-        return viewRoom(buildingName, roomName, extra)
+        return redirect(url_for('views.viewRoom',buildingName=buildingName, roomName=roomName))
 
     return render_template("addReview.html")
