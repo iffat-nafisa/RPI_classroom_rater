@@ -146,7 +146,7 @@ def checkStars():
         stars = request.form.get("star"+str(x))
         print(stars)
         if stars == "1":
-            return x
+            return 6-x
         x -= 1
     return -1
 
