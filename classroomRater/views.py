@@ -127,7 +127,7 @@ def viewRoom(buildingName, roomName, extra):
         frequency = sorted(frequency.items(), key=lambda x: x[1], reverse=True)
         allFeatures =[frequency[0][0], frequency[1][0],frequency[2][0]]
 
-    userShowReview = ""
+    userShowReview = reviewList
     current_building = buildingName
     current_room = roomName
     

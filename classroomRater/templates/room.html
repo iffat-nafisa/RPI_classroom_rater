@@ -57,8 +57,12 @@
             <span class = "ratingNumber">{{avgRating}}</span>
         </div>
         <div class="row">
-            <!-- Declare input limits for user -->
-            <p> {{userShowReview}} </p>
+            <h2>Written Reviews: </h2>
+            {% for item in userShowReview %}
+            <tr>
+              <td>{{item.written_review}}</td>
+            </tr>
+            {% endfor %}
         </div>
         <!-- Link to all reviews -->
         <div class="row">
