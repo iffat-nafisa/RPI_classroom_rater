@@ -59,8 +59,6 @@ class Feature(db.Model):
     description = db.Column(db.String(150), primary_key=True)
     room_number = db.Column(db.Integer, db.ForeignKey('room.number'))
 
-    # need to figure out many to many relationship 
-
 # Add schools and buildings to database
 def addSchoolAndBuildings():
     # declare a list of all buildings within RPI
