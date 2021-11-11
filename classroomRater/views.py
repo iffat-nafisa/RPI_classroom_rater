@@ -130,6 +130,11 @@ def viewRoom(buildingName, roomName, extra):
     userShowReview = reviewList
     current_building = buildingName
     current_room = roomName
+
+    print("Before viewRoom", request.method)
+
+    if request.method == "POST": # this needs to render the createReview page - addReview.html using the correct building name and room name
+        return render_template("addReview.html", buildingName=buildingName,roomName=roomName)
     
     
     # allReviews=[]
@@ -153,9 +158,9 @@ def checkStars():
 
 @views.route('/createReview/<buildingName>/<roomName>/<extra>', methods=['GET', 'POST'])
 def createReview(buildingName, roomName,extra):
-
+    print("Before createReview", request.method)
     if request.method == "POST":
-        request.method = ""
+        request.method = "GET"
         # send review to database 
         review = request.form.get("reviewTextbox")
         if review == "" or review == None:
@@ -169,5 +174,7 @@ def createReview(buildingName, roomName,extra):
         db.session.add(review_o) # add to the database 
         db.session.commit()
         return viewRoom(buildingName, roomName, extra)
+        # return redirect(url_for('views.viewRoom',buildingName=buildingName, roomName=roomName, extra=roomName))
+
 
     return render_template("addReview.html")
