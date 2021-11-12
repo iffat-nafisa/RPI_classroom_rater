@@ -170,6 +170,8 @@ def checkStars():
 @views.route('/createReview/<buildingName>/<roomName>', methods=['GET', 'POST'])
 def createReview(buildingName, roomName):
     print("Before createReview", request.method)
+    current_building = buildingName
+    current_room = roomName
     if request.method == "POST": # this is the post request for when the submit button was pressed
         # send review to database 
         review = request.form.get("reviewTextbox") 
@@ -199,4 +201,4 @@ def createReview(buildingName, roomName):
         # move to the page that shows this room
         return redirect(url_for('views.viewRoom',buildingName=buildingName, roomName=roomName))
 
-    return render_template("addReview.html")
+    return render_template("addReview.html", **locals())
