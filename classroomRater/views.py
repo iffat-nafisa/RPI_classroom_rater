@@ -83,8 +83,9 @@ def homepage():
             errorMessage('Room number must be a number.')
             return render_template("index.html")
 
-        room_exists = db.session.query(Room.number).filter_by(number=room_no).count()+db.session.query(Room.building_name).filter_by(building_name=building).count()
-        if room_exists > 1:
+        room_number_exists = db.session.query(Room.number).filter_by(number=room_no).count()
+        room_building_exists = db.session.query(Room.building_name).filter_by(building_name=building).count()
+        if (room_number_exists > 0 )&( room_building_exists>0 ):
             # redirect to the view room page because this room was found in the database
             return redirect(url_for('views.viewRoom',buildingName=building, roomName=room_no))
 
