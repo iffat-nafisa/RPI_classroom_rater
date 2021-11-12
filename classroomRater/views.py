@@ -83,8 +83,8 @@ def homepage():
             errorMessage('Room number must be a number.')
             return render_template("index.html")
 
-        room_exists = db.session.query(Room.number).filter_by(number=room_no).count()
-        if room_exists > 0:
+        room_exists = db.session.query(Room.number).filter_by(number=room_no).count()+db.session.query(Room.building_name).filter_by(building_name=building).count()
+        if room_exists > 1:
             # redirect to the view room page because this room was found in the database
             return redirect(url_for('views.viewRoom',buildingName=building, roomName=room_no))
 
@@ -116,30 +116,25 @@ def viewRoom(buildingName, roomName):
     frequency = {}
     for item in featureList:
         # checking the element in dictionary
-        if item in frequency:
+        if item.description.upper() in frequency:
             # incrementing the counr
-            frequency[item] += 1
+            frequency[item.description.upper()] += 1
         else:
             # initializing the count
-            frequency[item] = 1
+            frequency[item.description.upper()] = 1
 
     # sort the features by the number of occurances
-    frequency = sorted(frequency.items(), key=lambda x: x[1], reverse=True)
-    lst = []
-    for f in frequency:
-        lst.append(f)
+    lst = sorted(frequency.items(), key=lambda x: x[1], reverse=True)
     allFeatures=[]
     if(len(lst)<3): # if there are less than 3 reviews only display the ones we have
         for i in range(0,3): 
             if(i>=len(lst)):
                 allFeatures.append('Empty')
             else:
-                print(lst)
-                print(lst[i])
-                allFeatures.append(lst[i][0].description)
+                allFeatures.append(lst[i][0])
     else:
         # add the top 3 features. 
-        allFeatures =[lst[0][0].description, lst[1][0].description,lst[2][0].description]
+        allFeatures =[lst[0][0], lst[1][0],lst[2][0]]
 
     userShowReview = reviewList
     
@@ -184,7 +179,7 @@ def createReview(buildingName, roomName):
         rating = round(checkStars(), 1)
         
         # create the review class for the database
-        review_o = Review(id = hash(time.time()), rating=rating, written_review=review, room_number=roomName, building_name=buildingName)
+        review_o = Review(rating=rating, written_review=review, room_number=roomName, building_name=buildingName)
         features = featureList.split(";") # split the user inputted features by ;
         featuresUpdated = []
         # get the room to add the review to to the database or add it if its not there
@@ -194,7 +189,7 @@ def createReview(buildingName, roomName):
                 f = f.strip()
                 f = f.title()
                 featuresUpdated.append(f)
-                f_o = Feature(id = hash(time.time()), description=f, room_number=roomName, building_name=buildingName)
+                f_o = Feature(description=f, room_number=roomName, building_name=buildingName)
                 db.session.add(f_o)
                 db.session.commit()
 
