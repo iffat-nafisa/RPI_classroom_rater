@@ -12,7 +12,6 @@ buildingList = ["DCC", "SAGE", "Amos Eaton Hall", "Carnegie Building", "Center f
 # this function will show the user an error message in red.
 def errorMessage(message):
     flash(message,category='error')
-    pass
 
 
 
