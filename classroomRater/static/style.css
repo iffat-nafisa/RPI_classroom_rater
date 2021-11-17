@@ -1,3 +1,17 @@
+@import url('https://fonts.googleapis.com/css?family=Rajdhani&display=swap');
+
+/* change font for all */
+* {
+     font-size: 105%;
+
+  font-family: Rajdhani;
+}
+.border {
+    border-radius: 10px;
+    background-color: #cccccc;
+    padding: 45px;
+}
+
 /* Theme for general height attribute */
 .height {
     height: 30vh;
@@ -8,19 +22,21 @@
     position: relative;
     box-shadow: 0 0 40px rgba(51, 51, 51, .1)
 }
-
+.results h1 {
+    border-radius: 10px;
+}
 /* Theme for search icon */
 .search input {
     height: 60px;
-    text-indent: 25px;
+    text-indent: 30px;
     border: 2px solid #d6d4d4
 }
 
 /* Theme for search icon */
 .search .fa-search {
     position: absolute;
-    top: 20px;
-    left: 16px
+    top: 18px;
+    left: 14px
 }
 
 /* Theme for search button */
@@ -30,7 +46,7 @@
     right: 5px;
     height: 50px;
     width: 110px;
-    background: maroon
+    background: #cccccc
 }
 
 /* Theme for general item attribute */
@@ -52,12 +68,12 @@
 
 /* Theme for row in results attribute */
 .results .row{
-    background-color: khaki;
+    background-color:  #cccccc;
 }
 
 /* Theme for results header h1 */
-.results h1{
-    background-color: khaki;
+.results h1{ /*TODO make rounded*/
+    background-color:  #cccccc;
     font-size: 30px;
     padding: 10px;
     text-align: center;
@@ -68,9 +84,8 @@
     padding: 10px ;
     font-size: 25px;
     border-radius: 10px;
-    background-color:khaki;  
+    background-color: #cccccc;  
 }
-
 
 
 /* Theme for results header h4 */
@@ -78,7 +93,7 @@
     padding: 10px 5px ;
     font-size: 20px;
     border-radius: 10px;
-    background-color:khaki; 
+    background-color: #cccccc; 
 }
 
 /* Theme for picture upload in results */
@@ -94,63 +109,64 @@
 }
 
 /* Theme for star ratings in results */
-.results .star-rating{
+/*.results .rating{
     display: none;
+}*/
+
+/* use reverse flexbox to take advantage of flex-direction: reverse */
+.rating {
+  display: flex;
+  align-items: center;
+  width: 200px;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  margin: 40px auto;
+  position: relative;
+}
+/* hide the inputs */
+.rating input {
+  display: none;
+}
+/* set properties of all labels */
+.rating > label {
+  font-family: Arial;
+  font-size: 45px;
+  transition: 0.2s ease;
+  color: orange;
+}
+/* give label a hover state */
+.rating label:hover {
+  color: orange;
+  transition: 0.2s ease;
+}
+.rating label:active::before {
+  transform:scale(1.1);
 }
 
+/* set shape of unselected label */
+.rating label::before {
+  content: '\2606';
+  position: absolute;
+  top: 0px;
+  line-height: 26px;
+}
+/* set full star shape for checked label and those that come after it */
+.rating input:checked ~ label:before {
+  content:'\2605';
+}
+ 
 /* Theme for general rating in results */
 .results .rating{
     position: absolute;
-    top:15%;
-    left:36%;
-    transform:translate(-50%,-50%) rotateY(180deg);
-    display: flex;
-}
-
-/* Theme for general label attribute in results */
-.results label{
-    display: block;
-    cursor: pointer;
-    width: 50px;
-}
-
-/* Theme for before bullet point / label in results */
-.results label:before{
-    content: '\f005';
-    font-family: fontAwesome;
-    position: relative;
-    display: block;
-    font-size: 50px;
-    color: #101010;
-}
-
-/* Theme for after bullet point / label in results */
-.results label:after{
-    content: '\f005';
-    font-family: fontAwesome;
-    position: absolute;
-    display: block;
-    font-size: 50px;
-    color: #1f9cff;
-    top:0;
-    opacity: 0;
-    transition: 0.5s;
-    text-shadow: 0 2px 5px rgba(0,0,0,0.5);
-}
-
-/* Other themes regarding label */
-.results label:hover:after,
-.results label:hover ~ label::after,
-.results input:checked ~ label::after
-{
-    opacity: 1;
+    transform:translate(50%);
 }
 
 
 /* Theme for user rating (stars) */
 .results .fa-star{
     padding:12px 5px;
-    color:black;   
+    color:black;
+    text-align: center
 }
 
 /* Theme for user rating (number) */
@@ -187,7 +203,7 @@
     padding: 10px ;
     font-size: 25px;
     border-radius: 10px;
-    background-color:khaki;  
+    background-color: #cccccc;  
 }
 
 /* Themes for scrollbar */
@@ -196,7 +212,7 @@
 }
 ::-webkit-scrollbar-track{
     border-radius: 5px;
-    box-shadow: inset 0 0 10px grey;
+    box-shadow: inset 0 0 10px  #cccccc;
 }
 ::-webkit-scrollbar-thumb{
     border-radius: 5px;
@@ -213,4 +229,16 @@
     border-radius: 10px;
     background-color:green;
     text-align: center;
+}
+
+.container_px-4 {
+    padding: 20px;
+}
+
+.customBorder {
+    background: #dbdbdb;
+    border: black;
+    border-style: ridge;
+    border-radius: 10px;
+    padding: 20px;
 }

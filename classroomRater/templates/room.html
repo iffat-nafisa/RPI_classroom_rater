@@ -4,89 +4,90 @@
 
 
 {% block content %}
-<div class="container justify-content-left align-items-center">
-    <form method="POST">
+<div class="page">
+    <div class="container justify-content-left align-items-center">
+        <form method="POST">
 
-    <div class="results">
+        <div class="results">
 
-        <div class="row"> 
-            <h2>Building Name: {{current_building}} </h2>
-            <h2>Room Name: {{current_room}} </h2>
+            <div class="row"> 
+                <h2>Building Name: {{current_building}} </h2>
+                <h2>Room Name: {{current_room}} </h2>
+            </div>
         </div>
     </div>
-</div>
 
 
-<div class="container justify-content-left align-items-center">
-    <div class="results">
-        <div class="row">
-            <img src ="main_DCC.jpg" alt="Featured Picture Here"/>
-        </div>
+    <div class="container justify-content-left align-items-center">
+        <div class="results">
+            <div class="row">
+                <img src ="main_DCC.jpg" alt="Featured Picture Here"/>
+            </div>
 
-        <!-- Link to create review page -->
-        <div class="row">
-            <a href= "/createReview"><button class="btn-lg btn-primary">Add Review </button></a>
-        </div>
-        <!-- Extra spacing at the end -->
-        <div class="row">
-            <pre></pre>
+            <!-- Link to create review page -->
+            <div class="row">
+                <a href= "/createReview"><button class="btn-lg btn-primary">Add Review </button></a>
+            </div>
+            <!-- Extra spacing at the end -->
+            <div class="row">
+                <pre></pre>
+            </div>
         </div>
     </div>
-</div>
 
-<!-- Display features of the room -->
-<div class="container px-4">
-    <div class="row gx-5">
-        <div class="col">
-            <div class="p-4 border bg-light">{{allFeatures[0]}}</div>
-        </div>
-        <div class="col">
-            <div class="p-4 border bg-light">{{allFeatures[1]}}</div>
-        </div>
-        <div class="col">
-            <div class="p-4 border bg-light">{{allFeatures[2]}}</div>
-        </div>
-    </div>
-</div>
-
-<!-- Other information -->
-<div class="container justify-content-left align-items-center">
-    <div class="results">
-        <!-- Rating number -->
-        <div class="row"> 
-            <h2>Overall Rating: </h2>
-            <span class = "ratingNumber">{{avgRating}}</span>
-        </div>
-        <div class="row">
-            <h2>Written Reviews: </h2>
-        </div>
-        
-        {% for item in userShowReview %}
-           {{item.written_review}}<br>
-        {% endfor %}
-        </div>
-
-        <!-- Display extra pictures -->
+    <!-- Display features of the room -->
+    <div class="container_px-4">
         <div class="row gx-5">
             <div class="col">
-                <img src="extra_1.jfif" alt="Extra Image_1" />
+                <div class="customBorder">{{allFeatures[0]}}</div>
             </div>
             <div class="col">
-                <img src="extra_1.jfif" alt="Extra Image_1" />
+                <div class="customBorder">{{allFeatures[1]}}</div>
             </div>
             <div class="col">
-                <img src="extra_1.jfif" alt="Extra Image_1" />
+                <div class="customBorder">{{allFeatures[2]}}</div>
             </div>
-        </div>
-
-        <!-- Extra spacing at the end -->
-        <div class="row">
-            <pre></pre>
         </div>
     </div>
-    </form>
+
+    <!-- Other information -->
+    <div class="container justify-content-left align-items-center">
+        <div class="results">
+            <!-- Rating number -->
+            <div class="row"> 
+                <h2>Overall Rating: </h2>
+                <span class = "ratingNumber">{{avgRating}}</span>
+            </div>
+            <div class="row">
+                <h2>Written Reviews: </h2>
+            </div>
+            
+            {% for item in userShowReview %}
+               {{item.written_review}}<br>
+            {% endfor %}
+            </div>
+
+            <!-- Display extra pictures -->
+            <div class="row gx-5">
+                <div class="col">
+                    <img src="extra_1.jfif" alt="Extra Image_1" />
+                </div>
+                <div class="col">
+                    <img src="extra_1.jfif" alt="Extra Image_1" />
+                </div>
+                <div class="col">
+                    <img src="extra_1.jfif" alt="Extra Image_1" />
+                </div>
+            </div>
+
+            <!-- Extra spacing at the end -->
+            <div class="row">
+                <pre></pre>
+            </div>
+        </div>
+        </form>
+    </div>
+
 </div>
-
-
 
 {% endblock %}

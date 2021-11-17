@@ -155,13 +155,11 @@ def viewRoom(buildingName, roomName):
 
 # this will return the correct number of stars for a review
 def checkStars():
-    x = 5
-    while x > 0:
-        stars = request.form.get("star"+str(x))
-        if stars == "1":
-            return 6-x
-        x -= 1
-    return -1
+    stars = request.form.get("stars")
+    print(stars)
+    if stars == None:
+        return -1
+    return 6 - int(stars)
 
 
 
