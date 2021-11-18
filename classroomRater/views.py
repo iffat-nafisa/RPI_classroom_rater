@@ -187,12 +187,13 @@ def createReview(buildingName, roomName):
         room = db.session.query(Room.number, Room.building_name).filter_by(number=roomName, building_name=buildingName).first()
         if featureList!='':
             for f in features: # format the reviews so they look better on the page
-                f = f.strip()
-                f = f.title()
-                featuresUpdated.append(f)
-                f_o = Feature(description=f, room_number=roomName, building_name=buildingName)
-                db.session.add(f_o)
-                db.session.commit()
+                if f!='':
+                    f = f.strip()
+                    f = f.title()
+                    featuresUpdated.append(f)
+                    f_o = Feature(description=f, room_number=roomName, building_name=buildingName)
+                    db.session.add(f_o)
+                    db.session.commit()
 
         db.session.add(review_o) # add to the database 
         db.session.commit()
