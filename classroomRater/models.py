@@ -36,27 +36,26 @@ class Room(db.Model):
 # A review has an id, rating, text, and the room it's associated with
 # (ID, rating, written_review, ROOM_NUMBER)
 class Review(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Float, primary_key=True)
     rating = db.Column(db.Integer)
     written_review = db.Column(db.String(100000))
     room_number = db.Column(db.Integer, db.ForeignKey('room.number'))
     building_name = db.Column(db.String(300), db.ForeignKey('building.name'))
 
 # DB model for an image
-# An image has an id, its contents, a name, a mimetype, and the room it's associated with
+# An image has an id, its contents, a filename, and the room it's associated with
 # (ID, img, name, mimetype, ROOM_NUMBER)
 class Img(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    img = db.Column(db.Text, unique=True, nullable=False)
-    name = db.Column(db.Text, nullable=False)
-    mimetype = db.Column(db.Text, nullable=False)
+    id = db.Column(db.String(36), primary_key=True)
+    filename = db.Column(db.Text, nullable=False)
     room_number = db.Column(db.Integer, db.ForeignKey('room.number'))
+    building_name = db.Column(db.String(300), db.ForeignKey('building.name'))
     
 # DB model for a feature
 # A feature has a description and a room it's associated with
 # (DESCRIPTION, ROOM_NUMBER)
 class Feature(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Float, primary_key=True)
     description = db.Column(db.String(150))
     room_number = db.Column(db.Integer, db.ForeignKey('room.number'))
     building_name = db.Column(db.String(300), db.ForeignKey('building.name'))

@@ -6,7 +6,7 @@
 {% block content %}
     <div class="container justify-content-left align-items-center">
         <div class="results">
-            <form method="POST">
+            <form method="POST" enctype="multipart/form-data">
             <div class="results">
                 <div class="row"> 
                     <h2>Building Name: {{current_building}} </h2>
@@ -41,7 +41,7 @@
             <div class="row">
                 <!-- Allow users to uplpad pictures + prompt -->
                 <h4>Add Pictures: </h4>
-                <input class="fileUploadPicture" type="file" onchange="readURL(this)" accept="Image" multiple id="picTaken" name="picTaken">
+                <input class="fileUploadPicture" type="file" multiple id="picTaken" name="picTaken" accept="image/*">
             </div>
 
             <div class="row">

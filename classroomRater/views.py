@@ -1,18 +1,28 @@
-from flask import Blueprint, render_template, request, redirect, url_for,flash
-from models import db, Room, addSchoolAndBuildings, Review, Feature
+from flask import Flask, Blueprint, config, render_template, request, redirect, url_for,flash, abort
+from models import db, Room, addSchoolAndBuildings, Review, Feature, Img
 import time
+from werkzeug.utils import secure_filename
+import os
+import imghdr
+import uuid
 
 #Create Blueprint
 views = Blueprint('views', __name__)
-
+extensions = ['jpg', 'png', 'gif']
+imagePath = 'uploads/'
 # this is the master building list that contains all RPI acidemic building
 buildingList = ["DCC", "SAGE", "Amos Eaton Hall", "Carnegie Building", "Center for Biotechnology and Interdisciplinary Studies", "CBIS", "Chapel + Cultural Center", "Experimental Media and Performing Arts Center", "EMPAC", "Folsom Library", "Greene Building","Gurley Building", "Hirsch Observatory", "Houston Field House", "Jonsson Engineering Center", "Low Center", "West Hall", "Winslow Building"]
-
-
 # this function will show the user an error message in red.
 def errorMessage(message):
     flash(message,category='error')
 
+
+# Validate the input image 
+def validate_image(filename):
+    if '.' in filename:
+        if filename.rsplit('.', 1)[1].lower() in extensions:
+            return True
+    return False
 
 
 # this funciton will check to make sure that the text in the building search bar 
@@ -168,7 +178,6 @@ def checkStars():
 # this is the python code for the HTML page to create a review
 @views.route('/createReview/<buildingName>/<roomName>', methods=['GET', 'POST'])
 def createReview(buildingName, roomName):
-    print("Before createReview", request.method)
     current_building = buildingName
     current_room = roomName
     if request.method == "POST": # this is the post request for when the submit button was pressed
@@ -181,7 +190,9 @@ def createReview(buildingName, roomName):
         rating = round(checkStars(), 1)
         
         # create the review class for the database
-        review_o = Review(rating=rating, written_review=review, room_number=roomName, building_name=buildingName)
+        review_o = Review(id=time.time(),rating=rating, written_review=review, room_number=roomName, building_name=buildingName)
+        db.session.add(review_o) # add to the database 
+        db.session.commit()
         features = featureList.split(";") # split the user inputted features by ;
         featuresUpdated = []
         # get the room to add the review to to the database or add it if its not there
@@ -191,13 +202,32 @@ def createReview(buildingName, roomName):
                 f = f.strip()
                 f = f.title()
                 featuresUpdated.append(f)
-                f_o = Feature(description=f, room_number=roomName, building_name=buildingName)
+                f_o = Feature(id=time.time(), description=f, room_number=roomName, building_name=buildingName)
                 db.session.add(f_o)
                 db.session.commit()
 
-        db.session.add(review_o) # add to the database 
-        db.session.commit()
+
+        # add image to the database
+        uploadedFile = request.files["picTaken"]
+        filename = uploadedFile.filename
+        print(filename)
+        if filename == '':
+            errorMessage("Wrong file format")
+        if validate_image(filename): 
+            image_id = str(uuid.uuid4)
+            file_name = image_id + '.png'
+            exists = os.path.exists(imagePath)
+            if not exists:
+                os.makedirs(imagePath)
+            uploadedFile.save(os.path.join(imagePath, file_name))
+            image = Img(id=image_id, filename=file_name, room_number=roomName, building_name=buildingName)
+            db.session.add(image)
+            db.session.commit()
+
+        # else flash a message 
         # move to the page that shows this room
         return redirect(url_for('views.viewRoom',buildingName=buildingName, roomName=roomName))
 
     return render_template("addReview.html", **locals())
+
+    
