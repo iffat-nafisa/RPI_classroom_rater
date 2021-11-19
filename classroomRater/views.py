@@ -9,7 +9,7 @@ import uuid
 #Create Blueprint
 views = Blueprint('views', __name__)
 extensions = ['jpg', 'png', 'gif']
-imagePath = 'uploads/'
+imagePath = 'static/'
 # this is the master building list that contains all RPI acidemic building
 buildingList = ["DCC", "SAGE", "Amos Eaton Hall", "Carnegie Building", "Center for Biotechnology and Interdisciplinary Studies", "CBIS", "Chapel + Cultural Center", "Experimental Media and Performing Arts Center", "EMPAC", "Folsom Library", "Greene Building","Gurley Building", "Hirsch Observatory", "Houston Field House", "Jonsson Engineering Center", "Low Center", "West Hall", "Winslow Building"]
 # this function will show the user an error message in red.
@@ -118,8 +118,13 @@ def viewRoom(buildingName, roomName):
     # note: The first three elements of the list are considered to be the "featured" features shown in the room.html
     room=Room(number=roomName, building_name=buildingName)
     room=room.query.filter_by(number=roomName, building_name=buildingName).first()
-    featureList = room.features
-    reviewList =room.reviews
+    if room != None:
+        featureList = room.features
+        reviewList =room.reviews
+    else:
+        featureList = []
+        reviewList = []
+    
     avgRating = round(ave(reviewList),1)
     
     # change the line above to take from database
@@ -147,9 +152,17 @@ def viewRoom(buildingName, roomName):
         allFeatures =[lst[0][0], lst[1][0],lst[2][0]]
 
     userShowReview = list(reversed(reviewList))
-    userImages = room.images
-    for images in room.images:
-        print(images.filename)
+    if room != None:
+        userImagesUnformated = room.images
+        userImages = []
+        for image in userImagesUnformated:
+            userImages.append(image.filename)
+    else:
+        userImages = []
+        # userImages.append("Images/main_DCC.jpg")
+    if len(userImages) != 0:
+        print("in other thing filename is", userImages[0])
+    
     
     current_building = buildingName
     current_room = roomName
@@ -164,6 +177,13 @@ def viewRoom(buildingName, roomName):
 
     #**locals() passes all the local variables defines in this function to room.html
     return render_template("room.html", **locals())
+
+
+@views.route('/display_image/<filename>')
+def display_image(filename):
+    print("IN display_image filename is", filename)
+    return redirect(url_for('static', filename=filename,code=301))
+
 
 
 # this will return the correct number of stars for a review
