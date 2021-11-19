@@ -2,7 +2,6 @@
 <!-- Acts as a template file referenced by other HTML files so we don't have to repeatedly import things -->
 <!DOCTYPE html>
 <html lang="en">
-
     <head>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,12 +14,14 @@
       <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
       <!-- Add Icon Library (for creating the star for the review)-->
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
       <title>{% block title %}Home{% endblock %}</title>
     </head>
 
     <body>   
       <!-- navigation bar -->
-      <nav class="navbar navbar-expand-sm navbar-dark" style="background-color: maroon;">
+      <nav class="navbar navbar-expand-sm navbar-dark" style="background-color: #6e6e6e;">
           <button class="navbar-toggler" data-toggle="collapse" data-target="#tabs">
               <span class="navbar-toggler-icon"></span>
           </button>
@@ -30,6 +31,7 @@
               </div>
             </div>
       </nav>
+      <br> 
 
       <!-- error message -->
         {% with messages = get_flashed_messages(with_categories=true) %} {%if

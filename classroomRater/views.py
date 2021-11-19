@@ -146,7 +146,8 @@ def viewRoom(buildingName, roomName):
         # add the top 3 features. 
         allFeatures =[lst[0][0], lst[1][0],lst[2][0]]
 
-    userShowReview = reviewList
+    userShowReview = list(reversed(reviewList))
+
     
     current_building = buildingName
     current_room = roomName
@@ -165,13 +166,11 @@ def viewRoom(buildingName, roomName):
 
 # this will return the correct number of stars for a review
 def checkStars():
-    x = 5
-    while x > 0:
-        stars = request.form.get("star"+str(x))
-        if stars == "1":
-            return 6-x
-        x -= 1
-    return -1
+    stars = request.form.get("stars")
+    print(stars)
+    if stars == None:
+        return -1
+    return 6 - int(stars)
 
 
 
@@ -199,13 +198,14 @@ def createReview(buildingName, roomName):
         room = db.session.query(Room.number, Room.building_name).filter_by(number=roomName, building_name=buildingName).first()
         if featureList!='':
             for f in features: # format the reviews so they look better on the page
-                f = f.strip()
-                f = f.title()
-                featuresUpdated.append(f)
-                f_o = Feature(id=time.time(), description=f, room_number=roomName, building_name=buildingName)
-                db.session.add(f_o)
-                db.session.commit()
-
+                if f!='':
+                    f = f.strip()
+                    f = f.title()
+                    featuresUpdated.append(f)
+                    f_o = Feature(id=time.time(), description=f, room_number=roomName, building_name=buildingName)
+                    db.session.add(f_o)
+                    db.session.commit()
+                
 
         # add image to the database
         uploadedFile = request.files["picTaken"]
