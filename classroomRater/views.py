@@ -211,7 +211,7 @@ def createReview(buildingName, roomName):
         # add image to the database
         uploadedFile = request.files["picTaken"]
         filename = uploadedFile.filename
-        if filename == '':
+        if filename != "" and not validate_image(filename):
             errorMessage("Wrong file format")
         if validate_image(filename): 
             image_id = str(time.time())
