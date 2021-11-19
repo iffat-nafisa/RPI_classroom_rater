@@ -212,7 +212,7 @@ def createReview(buildingName, roomName):
         if filename == '':
             errorMessage("Wrong file format")
         if validate_image(filename): 
-            image_id = str(uuid.uuid4)
+            image_id = str(time.time())
             file_name = image_id + '.png'
             exists = os.path.exists(imagePath)
             if not exists:

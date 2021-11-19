@@ -46,7 +46,7 @@ class Review(db.Model):
 # An image has an id, its contents, a filename, and the room it's associated with
 # (ID, img, name, mimetype, ROOM_NUMBER)
 class Img(db.Model):
-    id = db.Column(db.String(36), primary_key=True)
+    id = db.Column(db.String(1000), primary_key=True)
     filename = db.Column(db.Text, nullable=False)
     room_number = db.Column(db.Integer, db.ForeignKey('room.number'))
     building_name = db.Column(db.String(300), db.ForeignKey('building.name'))
