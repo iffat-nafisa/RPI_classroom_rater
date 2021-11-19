@@ -147,7 +147,9 @@ def viewRoom(buildingName, roomName):
         allFeatures =[lst[0][0], lst[1][0],lst[2][0]]
 
     userShowReview = list(reversed(reviewList))
-
+    userImages = room.images
+    for images in room.images:
+        print(images.filename)
     
     current_building = buildingName
     current_room = roomName

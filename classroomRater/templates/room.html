@@ -17,11 +17,11 @@
         </div>
     </div>
 
-
+    
     <div class="container justify-content-left align-items-center">
         <div class="results">
             <div class="row">
-                <img src ="main_DCC.jpg" alt="Featured Picture Here"/>
+                <img src = {{userImages[0].filename}} alt="Featured Picture Here"/>
             </div>
 
             <!-- Link to create review page -->
@@ -70,14 +70,13 @@
             <!-- Display extra pictures -->
             <div class="row gx-5">
                 <div class="col">
-                    <img src="extra_1.jfif" alt="Extra Image_1" />
+                    
+                    
+                    {% for item in userImages %}
+                        <li> <img src = "uploads/{{item.filename}}" width = "500" height = "600"></li>
+                    {% endfor %}
                 </div>
-                <div class="col">
-                    <img src="extra_1.jfif" alt="Extra Image_1" />
-                </div>
-                <div class="col">
-                    <img src="extra_1.jfif" alt="Extra Image_1" />
-                </div>
+
             </div>
 
             <!-- Extra spacing at the end -->
