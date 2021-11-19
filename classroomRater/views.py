@@ -167,7 +167,6 @@ def viewRoom(buildingName, roomName):
 # this will return the correct number of stars for a review
 def checkStars():
     stars = request.form.get("stars")
-    print(stars)
     if stars == None:
         return -1
     return 6 - int(stars)
@@ -210,7 +209,6 @@ def createReview(buildingName, roomName):
         # add image to the database
         uploadedFile = request.files["picTaken"]
         filename = uploadedFile.filename
-        print(filename)
         if filename == '':
             errorMessage("Wrong file format")
         if validate_image(filename): 
